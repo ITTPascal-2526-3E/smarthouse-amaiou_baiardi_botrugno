@@ -23,7 +23,7 @@ class Program
         cctv.StorageCapacity = 256;
         cctv.NightVision = true;
         cctv.BulletProof = false;
-        Console.WriteLine($"CCTV is on: {cctv.isOn}");
+        
 
 
     }
