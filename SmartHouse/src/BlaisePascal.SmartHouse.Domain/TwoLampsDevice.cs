@@ -14,7 +14,7 @@ namespace BlaisePascal.SmartHouse.Domain
         private EcoLamp ecoLamp = new EcoLamp();
         public void getLampAttribute(Enum lampType, double lampHeat, Enum energyClass)
         {
-            lamp.lampTypeProperty
+            
 
         }
     }
