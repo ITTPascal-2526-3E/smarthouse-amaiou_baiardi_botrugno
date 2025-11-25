@@ -10,41 +10,77 @@ namespace BlaisePascal.SmartHouse.Domain
 {
     public class AirConditioner
     {
-        public bool isOn { get; set; }
+        public bool isOn = false;
         public double temp { get; set; }
         private double minTemp = 16.0;
         private double maxTemp = 25.0;
         public enum funSpeed { Low, Medium, High }
-        public bool energySavingMode { get; set; }
-        private Timer timer;
+        public bool energySavingMode = false;
 
-        public void startTimer(TimeSpan start, TimeSpan end) 
+        public void turnOn()
         {
-            timer = new Timer(1000 * 60);
-            timer.Elapsed += (start, end) => ControllaFasciaOraria(start, end);
-            timer.Reset = true;
-            timer.Start();
-
-            Console.WriteLine("timer avviato. Controllo fasce orarie ogni giorno");
+            isOn = true;
         }
-
-        private void ControllaFasciaOraria(TimeSpan start, TimeSpan end)
+        public void turnOff(int time)
         {
-            TimeSpan oraCorrente = DateTime.Now.TimeOfDay;
-
-            // Controllo fascia oraria classica (es. 08:00 → 18:00)
-            bool inFascia = oraCorrente >= start && oraCorrente <= end;
-
-            if (inFascia)
+            if (isOn == true && time > 0 && time <= 30)
             {
-                AirConditioner.isOn = true();
-            }
-            else
-            {
-                AirConditioner.isOn = false();
+                for (int i = 0; i == time; i++)
+                {
+                    if (i == time)
+                    {
+                        isOn = false;
+                    }
+
+                }
             }
         }
-        
+        public void PutInEnergySavingMode()
+        {
+            energySavingMode = true;
+        }
+
+        public void changefunspeed()
+        {
+            if (isOn == true)
+            {
+                funSpeed currentSpeed = funSpeed.Low;
+                switch (currentSpeed)
+                {
+                    case funSpeed.Low:
+                        currentSpeed = funSpeed.Medium;
+                        break;
+                    case funSpeed.Medium:
+                        currentSpeed = funSpeed.High;
+                        break;
+                    case funSpeed.High:
+                        currentSpeed = funSpeed.Low;
+                        break;
+                }
+
+            }
+
+        }
+        public void increaseTemp()
+        {
+            if (isOn == true)
+            {
+                if (temp < maxTemp)
+                {
+                    temp += 1.0;
+                }
+            }
+        }
+        public void decreaseTemp()
+        {
+            if (isOn == true)
+            {
+                if (temp > minTemp)
+                {
+                    temp -= 1.0;
+                }
+            }
+        }
 
     }
 }
