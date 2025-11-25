@@ -10,12 +10,14 @@ namespace BlaisePascal.SmartHouse.Domain
 {
     public class AirConditioner
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOn = false;
         public double temp { get; set; }
         private double minTemp = 16.0;
         private double maxTemp = 25.0;
         public enum funSpeed { Low, Medium, High }
         public bool energySavingMode = false;
+        public string name = " ";
 
         public void turnOn()
         {
@@ -80,6 +82,10 @@ namespace BlaisePascal.SmartHouse.Domain
                     temp -= 1.0;
                 }
             }
+        }
+        public void setName(string airConditionerName)
+        {
+            name = airConditionerName;
         }
 
     }
