@@ -5,7 +5,7 @@ namespace BlaisePascal.SmartHouse.LampType
     public class Lamp
     {
         //Creazione variabili/attributi
-        public bool isOn = false;
+        public bool isOn { get; set; }
         private LampType lampType { get; set; }
         private double lampHeat {  get; set; }
         private EnergyClass energyClass {  get; set; }
