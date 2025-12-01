@@ -6,24 +6,24 @@ namespace BlaisePascal.SmartHouse.LampType
     {
         //Creazione variabili/attributi
         public bool isOn { get; set; }
-        private LampType lampType { get; set; }
-        private double lampHeat {  get; set; }
-        private EnergyClass energyClass {  get; set; }
-        private int brightness;
-        private int lumen {  get; set; }
+        public LampType lampType { get; set; }
+        private double lampHeat { get; set; }
+        private EnergyClass energyClass { get; set; }
+        public int brightness;
+        private int lumen { get; set; }
         public Color color;
-        private int durationBeforeItFlashes {  get; set; }
+        private int durationBeforeItFlashes { get; set; }
 
         private int minBrightenes = 0;
         private int maxBrightenes = 100;
 
-        public LampType lampTypeProperty
-        {
-            get { return lampType; }
-            set { lampType = value; }
+        public LampType lampTypeProperty(string lamptype) //Prende una stringa (lampType, ad es. "Led")  
+        {                                                 //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
+            lampType = Enum.Parse<LampType>(lamptype);    //restituisce il valore dell’enum corrispondente.
+            return lampType;
         }
 
-        
+
 
         public int brightnessProperty
         {
@@ -36,8 +36,8 @@ namespace BlaisePascal.SmartHouse.LampType
                 }
             }
         }
-        
-       
-        
+
+
+
     }
 }

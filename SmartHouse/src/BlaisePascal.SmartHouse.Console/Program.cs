@@ -10,7 +10,7 @@ class Program
     {
         Lamp lamp = new Lamp();
         lamp.isOn = true;
-        lamp.lampTypeProperty = "led"; // Updated to match the correct property name
+        lamp.lampTypeProperty("led"); // Updated to match the correct property name
         lamp.brightness = 80; // Updated to match the correct property name
 
         Console.WriteLine(value: $"Lamp is on: {lamp.isOn}");

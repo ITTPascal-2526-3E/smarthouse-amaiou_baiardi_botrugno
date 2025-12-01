@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.LampType
 {
-    public class EcoLamp
+    public class EcoLamp : Lamp
     {
         //Creazione variabili/attributi
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string name = " ";
         public bool isOn = false;
         private LampType lampType { get; set; }
         private double lampHeat { get; set; }
@@ -17,7 +19,7 @@ namespace BlaisePascal.SmartHouse.LampType
         private int lumen { get; set; }
         public Color color { get; set; }
         private int durationBeforeItFlashes { get; set; }
-
+        private int durationBeforeOff;
         private int minBrightenes = 0;
         private int maxBrightenes = 100;
 
@@ -32,31 +34,21 @@ namespace BlaisePascal.SmartHouse.LampType
                 }
             }
         }
-        /*
-        public bool isOn = false;
-        private string lampType;
-        private double lampHeat;
-        private string energyClass;
-        private int brightness;
-        private int lumen;
-        private int durationBeforeItFlashes;
-        private Color color;
-        private int durationBeforeOff;
 
 
-        
-        /*
+
+
         //Metodo per settare il tempo dopo il quale la lampada si spegne
         public void turnOffAfterDuration(int duration)
         {
             if (duration >= 60)
             {
                 this.durationBeforeOff = duration;
-               
+
             }
             else
             {
-                
+
             }
         }
 
@@ -65,24 +57,25 @@ namespace BlaisePascal.SmartHouse.LampType
         {
             if (energyClassValue == "A")
             {
-                this.energyClass = energyClassValue;
+                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A+")
             {
-                this.energyClass = energyClassValue;
+                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A++")
             {
-                this.energyClass = energyClassValue;
+                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A+++")
             {
-                this.energyClass = energyClassValue;
+                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else
             {
-                
+
             }
+
         }
 
         //Metodo per settare la luminosità da 0 a 100
@@ -94,23 +87,26 @@ namespace BlaisePascal.SmartHouse.LampType
             }
             else
             {
-                
+
             }
         }
 
         //Metodo per settare il colore solo se la lampada è di tipo led
         public void setColor(string color)
         {
-            if (lampType == "led")
+            if (this.lampType == LampType.led)
             {
-                this.color = color;
+                this.color = Enum.Parse<Color>(color);
             }
             else
             {
-                
+
             }
         }
-        */
-
+        public void setName(string EcoLampName)
+        {
+            name = EcoLampName;
+        }
     }
+
 }
