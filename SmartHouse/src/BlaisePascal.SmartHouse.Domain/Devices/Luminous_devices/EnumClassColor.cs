@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlaisePascal.SmartHouse 
+namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices 
 { 
     public enum Color
     {

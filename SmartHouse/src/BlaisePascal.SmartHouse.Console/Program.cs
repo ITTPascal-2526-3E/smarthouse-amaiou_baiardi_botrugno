@@ -1,7 +1,9 @@
 ﻿using BlaisePascal.SmartHouse;
-using BlaisePascal.SmartHouse.Domain;
-using BlaisePascal.SmartHouse.LampType;
+using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
+using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
+using BlaisePascal.SmartHouse.Domain.Devices.Temp_devices;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 namespace BlaisePascal.SmartHouse.Domain;
 
 class Program
@@ -16,13 +18,9 @@ class Program
         Console.WriteLine(value: $"Lamp is on: {lamp.isOn}");
         Console.WriteLine($"Lamp brightness: {lamp.brightness}"); // Updated to match the correct property name
 
-        CCTV cctv = new CCTV();
-        cctv.isOn = true;
-        cctv.ResolutionWidth = 1920;
-        cctv.ResolutionHeight = 1080;
-        cctv.FrameRate = 30;
-        cctv.StorageCapacity = 256;
-        cctv.NightVision = true;
-        cctv.BulletProof = false;
+        Thermostat thermostat = new Thermostat();
+        thermostat.turnOnAirConditioner();
+        AirConditioner airConditioner = new AirConditioner();
+        Console.WriteLine(airConditioner.isOn);
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse.LampType
+namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public class EcoLamp : Lamp
     {
@@ -43,7 +43,7 @@ namespace BlaisePascal.SmartHouse.LampType
         {
             if (duration >= 60)
             {
-                this.durationBeforeOff = duration;
+                durationBeforeOff = duration;
 
             }
             else
@@ -57,19 +57,19 @@ namespace BlaisePascal.SmartHouse.LampType
         {
             if (energyClassValue == "A")
             {
-                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
+                energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A+")
             {
-                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
+                energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A++")
             {
-                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
+                energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else if (energyClassValue == "A+++")
             {
-                this.energyClass = Enum.Parse<EnergyClass>(energyClassValue);
+                energyClass = Enum.Parse<EnergyClass>(energyClassValue);
             }
             else
             {
@@ -94,7 +94,7 @@ namespace BlaisePascal.SmartHouse.LampType
         //Metodo per settare il colore solo se la lampada è di tipo led
         public void setColor(string color)
         {
-            if (this.lampType == LampType.led)
+            if (lampType == LampType.led)
             {
                 this.color = Enum.Parse<Color>(color);
             }

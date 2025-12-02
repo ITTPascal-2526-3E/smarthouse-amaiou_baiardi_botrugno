@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse.Domain
+namespace BlaisePascal.SmartHouse.Domain.Devices
 {
-    public class Thermostat
+    public class Device
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        
     }
 }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse
+namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public enum EnergyClass
+    public enum LampType
     {
-       // a = +
-       Aaaa, Aaa, Aa, A, B, C, D, E, F, G
+        led, incadescentBulb, halogen, neon
     }
 }

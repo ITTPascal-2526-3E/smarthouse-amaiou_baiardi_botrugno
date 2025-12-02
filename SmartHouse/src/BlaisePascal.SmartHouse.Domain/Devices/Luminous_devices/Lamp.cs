@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace BlaisePascal.SmartHouse.LampType
+namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public class Lamp
     {

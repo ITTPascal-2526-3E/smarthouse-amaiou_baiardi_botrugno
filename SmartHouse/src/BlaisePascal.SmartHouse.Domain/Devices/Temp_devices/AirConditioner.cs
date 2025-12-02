@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BlaisePascal.SmartHouse.Domain.AirConditioner;
+using static BlaisePascal.SmartHouse.Domain.Devices.Temp_devices.AirConditioner;
 
-namespace BlaisePascal.SmartHouse.Domain
+namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 {
     public class AirConditioner
     {
