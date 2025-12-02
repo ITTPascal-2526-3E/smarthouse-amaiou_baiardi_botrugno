@@ -8,44 +8,63 @@ namespace BlaisePascal.SmartHouse.Domain
 {
     public class CCTV
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOn = false;
         private int resolutionWidth { get; set; }
         private int resolutionHeight { get; set; }
         private int frameRate { get; set; }
-        private int storageCapacity { get; set; } // in GB
-        private bool nightVision { get; set; }
-        private bool bulletProof { get; set; }
-        public int ResolutionWidth
-        {
-            get { return resolutionWidth; }
-            set { resolutionWidth = value; }
-        }
-        public int ResolutionHeight
-        {
-            get { return resolutionHeight; }
-            set { resolutionHeight = value; }
-        }
-        public int FrameRate
-        {
-            get { return frameRate; }
-            set { frameRate = value; }
-        }
-        public int StorageCapacity
+
+
+        private int storageCapacity;// in GB
+
+
+        public int storageCapacity_Property
         {
             get { return storageCapacity; }
-            set { storageCapacity = value; }
-        }
-        public bool NightVision
-        {
-            get { return nightVision; }
-            set { nightVision = value; }
-        }
-
-        public bool BulletProof
-        {
-            get { return bulletProof; }
-            set { bulletProof = value; }
+            set
+            {
+                if (storageCapacity >= min_storageCapacity && storageCapacity <= max_storageCapacity)
+                {
+                    storageCapacity = value;
+                }
+            }
         }
 
-    }  
+
+        private bool nightVision = true;
+        private bool bulletProof = true;
+
+        private int max_storageCapacity = 500;
+        private int min_storageCapacity = 100;
+
+        public void changeStatus()
+        {
+            isOn = true;
+        }
+
+        public void change_nightVision()
+        {
+            isOn = false;
+        }
+        public void change_bulletProof()
+        {
+            isOn = false;
+        }
+
+        public void change_storageCapacity(int value)
+        {
+            if (value >= min_storageCapacity && value <= max_storageCapacity)
+            { storageCapacity = value; }
+        }
+
+        public void changeWidth(int value)
+        {
+            resolutionWidth = value;
+        }
+
+        public void changeHeight(int value)
+        {
+            resolutionHeight = value;
+        }
+    }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain
 {
-    internal class Thermostat
+    public class Thermostat
     {
-
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

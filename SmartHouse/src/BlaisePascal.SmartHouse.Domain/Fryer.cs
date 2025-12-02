@@ -8,7 +8,21 @@ namespace BlaisePascal.SmartHouse.Domain
 {
     public class Fryer
     {
-        private string type { get; set; } // a olio o ad aria
+        public Guid Id { get; set; } = Guid.NewGuid();
+        private string type;// a olio o ad aria
+
+        public string typeProperty
+        {
+            get { return type; }
+            set
+            {
+                if (type == "olio" || type == "aria")
+                {
+                    type = value;
+                }
+            }
+        }
+
         public bool isOn = false;
         private string basketStatus = "down";  // status basket può essere down o up
         private int temperature { get; set; }
@@ -16,6 +30,9 @@ namespace BlaisePascal.SmartHouse.Domain
 
         private int minTemp = 175; // temperature standard di una friggitrice vera prese da Google
         private int maxTemp = 200;
+
+        private int max_numberOfFryer_BeforeChangeOil = 10;
+        private int min_numberOfFryer_BeforeChangeOil = 3;
 
         public void changeStatus()
         {
@@ -33,11 +50,10 @@ namespace BlaisePascal.SmartHouse.Domain
             { temperature = value; }
         }
 
-        public void changeNumberOfFryerBeforeChangeOil(int value)
+        public void change_NumberOfFryer_BeforeChangeOil(int value)
         {
-            // aggiungere un if per il controllo del value
+            if (value >= min_numberOfFryer_BeforeChangeOil && value <= max_numberOfFryer_BeforeChangeOil)
             { numberOfFryerBeforeChangeOil = value; }
         }
     }
 }
-
