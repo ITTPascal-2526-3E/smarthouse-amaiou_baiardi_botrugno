@@ -17,7 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         private double maxTemp = 25.0;
         public enum funSpeed { Low, Medium, High }
         public bool energySavingMode = false;
-        public string name = " ";
+        private string name = " ";
 
         public void turnOn()
         {
