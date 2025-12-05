@@ -14,13 +14,29 @@ class Program
         lamp.isOn = true;
         lamp.lampTypeProperty("led"); // Updated to match the correct property name
         lamp.brightness = 80; // Updated to match the correct property name
+        
 
         Console.WriteLine(value: $"Lamp is on: {lamp.isOn}");
         Console.WriteLine($"Lamp brightness: {lamp.brightness}"); // Updated to match the correct property name
 
-        Thermostat thermostat = new Thermostat();
-        thermostat.turnOnAirConditioner();
         AirConditioner airConditioner = new AirConditioner();
         Console.WriteLine(airConditioner.isOn);
+        Console.WriteLine(airConditioner.temp);
+        Console.WriteLine(airConditioner.energySavingMode);
+
+       
+
+        Thermostat thermostat = new Thermostat();
+        thermostat.turnOnAirConditioner();
+        thermostat.turnOffAirConditioner();
+        thermostat.changeAirConditionerMode();
+        thermostat.changeAirConditionerFunSpeed();
+        thermostat.increaseAirConditionerTemp();
+        thermostat.decreaseAirConditionerTemp();
+        thermostat.setName();
+        Console.WriteLine(thermostat.Id);
+
+        //finire di richiamare le funzioni di ogni classe 
+
     }
 }

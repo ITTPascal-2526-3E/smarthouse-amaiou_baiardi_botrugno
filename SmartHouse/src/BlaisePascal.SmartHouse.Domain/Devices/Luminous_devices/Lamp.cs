@@ -5,13 +5,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
     public class Lamp
     {
         //Creazione variabili/attributi
+        public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOn { get; set; }
         public LampType lampType { get; set; }
         private double lampHeat { get; set; }
         private EnergyClass energyClass { get; set; }
         public int brightness;
         private int lumen { get; set; }
-        public Color color;
+        public Color color { get; set; }
         private int durationBeforeItFlashes { get; set; }
 
         private int minBrightenes = 0;
@@ -36,8 +37,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 }
             }
         }
-
-
 
     }
 }
