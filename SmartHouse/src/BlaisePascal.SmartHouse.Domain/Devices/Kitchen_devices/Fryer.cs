@@ -25,11 +25,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 
         public bool isOn = false;
         private string basketStatus = "down";  // status basket può essere down o up
-        private int temperature { get; set; }
+        private double temperature { get; set; }
         public int numberOfFryerBeforeChangeOil { get; set; }
 
-        private int minTemp = 175; // temperature standard di una friggitrice vera prese da Google
-        private int maxTemp = 200;
+        private double minTemp = 160.0; // temperature standard di una friggitrice vera prese da Google
+        private double maxTemp = 220.0;
 
         private int max_numberOfFryer_BeforeChangeOil = 10;
         private int min_numberOfFryer_BeforeChangeOil = 3;
@@ -44,7 +44,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
             basketStatus = "up";
         }
 
-        public void changeTemp(int value)
+        public void changeTemp(double value)
         {
             if (value >= minTemp && value <= maxTemp)
             { temperature = value; }
