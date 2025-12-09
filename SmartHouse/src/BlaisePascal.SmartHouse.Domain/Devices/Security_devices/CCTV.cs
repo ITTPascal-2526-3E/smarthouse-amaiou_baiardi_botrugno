@@ -27,6 +27,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
                 {
                     storageCapacity = value;
                 }
+                else 
+                {
+                    throw new ArgumentOutOfRangeException($"Storage capacity must be between {min_storageCapacity} and {max_storageCapacity} GB.");
+                }
             }
         }
 
@@ -55,6 +59,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         {
             if (value >= min_storageCapacity && value <= max_storageCapacity)
             { storageCapacity = value; }
+            else
+            {
+                throw new ArgumentOutOfRangeException($"Storage capacity must be between {min_storageCapacity} and {max_storageCapacity} GB.");
+            }
         }
 
         public void changeWidth(int value)

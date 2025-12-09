@@ -48,12 +48,20 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
         {
             if (value >= minTemp && value <= maxTemp)
             { temperature = value; }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Temperature must be between 160 and 220 degrees Celsius.");
+            }
         }
 
         public void change_NumberOfFryer_BeforeChangeOil(int value)
         {
             if (value >= min_numberOfFryer_BeforeChangeOil && value <= max_numberOfFryer_BeforeChangeOil)
             { numberOfFryerBeforeChangeOil = value; }
+            else
+            {
+                throw new ArgumentOutOfRangeException($"Number of fryings before changing oil must be between {min_numberOfFryer_BeforeChangeOil} and {max_numberOfFryer_BeforeChangeOil}.");
+            }
         }
     }
 }

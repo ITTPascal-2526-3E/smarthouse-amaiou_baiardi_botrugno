@@ -12,7 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         private EnergyClass energyClass { get; set; }
         public int brightness;
         private int lumen { get; set; }
-        public Color color { get; set; }
+        public Color color;
         private int durationBeforeItFlashes { get; set; }
 
         private int minBrightenes = 0;
@@ -35,8 +35,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 {
                     brightness = value;
                 }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Brightness must be between 0 and 100.");
+                }
             }
         }
-
+       
     }
 }

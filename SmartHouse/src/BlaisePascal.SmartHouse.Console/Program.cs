@@ -1,10 +1,7 @@
-﻿using BlaisePascal.SmartHouse;
-using BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Temp_devices;
-using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using Color = BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Color;
 namespace BlaisePascal.SmartHouse.Domain;
 
@@ -80,17 +77,17 @@ class Program
         door.changeDoorState();
         Console.WriteLine("Stato porta cambiato: ");
         door.changeLength(6.00);
-        Console.WriteLine("Lunghezza porta cambiata: " );
+        Console.WriteLine("Lunghezza porta cambiata: ");
         door.changeHeight(2.50);
-        Console.WriteLine("Altezza porta cambiata: " );
+        Console.WriteLine("Altezza porta cambiata: ");
         door.changeWidth(0.90);
-        Console.WriteLine("Larghezza porta cambiata: " );
+        Console.WriteLine("Larghezza porta cambiata: ");
         door.change_BulletProof();
-        Console.WriteLine("Porta antiproiettile cambiata: " );
+        Console.WriteLine("Porta antiproiettile cambiata: ");
         door.change_EnterHouseDoor();
-        Console.WriteLine("Porta d'ingresso cambiata: " );
+        Console.WriteLine("Porta d'ingresso cambiata: ");
         door.change_InsideHouseDoor();
-        Console.WriteLine("Porta interna cambiata: " );
+        Console.WriteLine("Porta interna cambiata: ");
 
 
         CCTV cctv = new CCTV();
@@ -120,7 +117,7 @@ class Program
 
 
 
-        
+
 
     }
 }

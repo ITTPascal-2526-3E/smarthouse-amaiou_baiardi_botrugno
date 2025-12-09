@@ -32,6 +32,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 {
                     brightness = value;
                 }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Brightness must be between 0 and 100.");
+                }
             }
         }
 
@@ -48,7 +52,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
             else
             {
-
+                throw new ArgumentOutOfRangeException("Duration must be at least 60 seconds.");
             }
         }
 
@@ -73,6 +77,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
             else
             {
+                throw new ArgumentException("Invalid energy class. Allowed values are A, A+, A++, A+++.");
 
             }
 
@@ -87,7 +92,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
             else
             {
-
+                throw new ArgumentOutOfRangeException("Brightness must be between 0 and 100.");
             }
         }
 
@@ -100,7 +105,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
             else
             {
-
+                throw new InvalidOperationException("Color can only be set for LED lamps.");
             }
         }
         public void setName(string EcoLampName)

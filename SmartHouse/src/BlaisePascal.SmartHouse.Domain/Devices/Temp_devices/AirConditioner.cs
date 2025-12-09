@@ -61,7 +61,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
                 }
 
             }
-
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is off. Cannot change fan speed.");
+            }
         }
         public void increaseTemp()
         {
@@ -72,6 +75,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
                     temp += 1.0;
                 }
             }
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is off. Cannot increase temperature.");
+            }
         }
         public void decreaseTemp()
         {
@@ -81,6 +88,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
                 {
                     temp -= 1.0;
                 }
+            }
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is off. Cannot decrease temperature.");
             }
         }
         public void setName(string airConditionerName)
