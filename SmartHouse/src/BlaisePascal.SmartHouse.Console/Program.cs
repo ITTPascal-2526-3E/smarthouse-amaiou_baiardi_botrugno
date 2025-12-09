@@ -114,6 +114,9 @@ class Program
         Console.WriteLine("Temperatura friggitrice cambiata: ");
         fryer.change_NumberOfFryer_BeforeChangeOil(5);
         Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
+        fryer.typeProperty = "olio";
+        Console.WriteLine("Tipo di friggitrice cambiato: " + fryer.typeProperty);
+        Console.WriteLine("ID Friggitrice: " + fryer.Id);
 
 
 
