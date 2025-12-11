@@ -2,6 +2,7 @@
 using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Temp_devices;
+using System.Reflection;
 using Color = BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Color;
 namespace BlaisePascal.SmartHouse.Domain;
 
@@ -9,33 +10,59 @@ class Program
 {
     static void Main(string[] args)
     {
-        Lamp lamp = new Lamp();
-        lamp.isOn = true;
-        lamp.lampTypeProperty("led"); // Updated to match the correct property name
-        lamp.brightness = 80; // Updated to match the correct property name
+        Guid id = Guid.NewGuid();
+        Lamp lamp = new Lamp(35.0, 800, 5000);
+        lamp.getLampType("led");
+        lamp.getEnergyClass("A");
+        lamp.turnOn_Off();
+        Console.WriteLine(lamp.IsOn);
+        lamp.changeColor("red");
+        Console.WriteLine(lamp.Color);
+        lamp.setBrightness(70); // Updated to match the correct property name
+        Console.WriteLine(lamp.brightness);
 
 
-        Console.WriteLine(value: $"Lamp is on: {lamp.isOn}");
-        Console.WriteLine($"Lamp brightness: {lamp.brightness}"); // Updated to match the correct property name
-        Console.WriteLine("Lamp ID: " + lamp.Id);
-        Console.WriteLine("Accesa: " + lamp.isOn);
-        Console.WriteLine("Tipo: " + lamp.lampType);
-        Console.WriteLine("Luminosità: " + lamp.brightnessProperty);
-        Console.WriteLine("Colore: " + lamp.color);
+
+        
+        EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000);
+        ecoLamp.getLampType("led");
+        ecoLamp.getEnergyClass("Aaa");
+        ecoLamp.changeColor("blue");
+        ecoLamp.turnOn_Off();
+        ecoLamp.turnOffAfterDuration(120);  
+        Console.WriteLine(ecoLamp.IsOn);
+        Console.WriteLine(ecoLamp.Color);
+        Console.WriteLine(ecoLamp.Id);
+        Console.WriteLine(ecoLamp.EnergyClass);
+        Console.WriteLine(ecoLamp.LampType);
 
 
-        EcoLamp ecoLamp = new EcoLamp();
-        ecoLamp.turnOffAfterDuration(120);
-        Console.WriteLine("EcoLamp spegnimento dopo durata impostata.");
-        ecoLamp.setEnergyClass("A+++");
-        Console.WriteLine("Classe energetica EcoLamp impostata.");
-        ecoLamp.setBrightness(ecoLamp.brightnessProperty);
-        Console.WriteLine("Luminosità EcoLamp impostata.");
-        ecoLamp.setName("EcoBright 3000");
-        Console.WriteLine("Nome EcoLamp impostato: " + ecoLamp.name);
-        // Update the following line to pass a string representation of the Color enum value
-        ecoLamp.setColor(Color.red.ToString());
-        Console.WriteLine("Colore EcoLamp impostato: " + ecoLamp.color);
+
+        TwoLampsDevice twoLampDevice = new TwoLampsDevice();
+        Lamp lamp2 = new Lamp(35.0, 200, 5000);
+        twoLampDevice.getLampAttributes(lamp2);
+        twoLampDevice.getLampType("led");
+        twoLampDevice.getEnergyClass("B");
+        twoLampDevice.turnOn_Off();
+        twoLampDevice.changeColor("green");
+        twoLampDevice.setBrightness(50);
+        Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.IsOn);
+        Console.WriteLine("Lampada 1 - Colore: " + lamp2.Color);
+        Console.WriteLine("Lampada 1 - Luminosità: " + lamp2.brightness);
+        EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000);
+        twoLampDevice.getEcoLampAttributes(ecoLamp2);
+        twoLampDevice.getEcoLampType("led");
+        twoLampDevice.getEcoLampEnergyClass("Aaa");
+        twoLampDevice.ecoLampTurnOn_Off();
+        twoLampDevice.ecoLampChangeColor("yellow");
+        twoLampDevice.ecoLampSetBrightness(80);
+        twoLampDevice.turnOffAfterDuration(90);
+        Console.WriteLine("Lampada 2 - Stato acceso: " + ecoLamp2.IsOn);
+        Console.WriteLine("Lampada 2 - Colore: " + ecoLamp2.Color);
+        Console.WriteLine("Lampada 2 - Luminosità: " + ecoLamp2.brightness);
+        Console.WriteLine(ecoLamp2.DurationBeforeOff);
+
+
 
 
 

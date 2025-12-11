@@ -5,46 +5,64 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
     public class Lamp
     {
         //Creazione variabili/attributi
-        public Guid Id { get; set; }
-        public bool isOn { get; set; }
-        public LampType lampType { get; set; }
-        private double lampHeat { get; set; }
-        private EnergyClass energyClass { get; set; }
+        public Guid Id { get; protected set; }
+        public bool IsOn { get; protected set; }
+        public LampType LampType { get; protected set; }
+        public double LampHeat { get; protected set; }
+        public EnergyClass EnergyClass { get;protected set; }
         public int brightness;
-        private int lumen { get; set; }
-        public Color color;
-        private int durationBeforeItFlashes { get; set; }
+        public int Lumen { get;protected set; }
+        public Color Color { get; protected set; }
+        public int DurationBeforeItFlashes { get; protected set; }
 
         private int minBrightenes = 0;
         private int maxBrightenes = 100;
         
-        public EnergyClass getEnergyClass (string energyClass)       
-        {                
-            this.energyClass = Enum.Parse<EnergyClass>(energyClass);    
-            return this.energyClass;
-        }
-
-        public void changeState()   //Cambia lo stato della lampada (accesa/spenta)
+        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes)
         {
-            if (isOn == true)
-            {
-                isOn = false;
-            }
-            else
-            {
-                isOn = true;
-            }
+            Id = Guid.NewGuid();
+            IsOn = false;
+            this.LampHeat = lampHeat;
+            this.Lumen = lumen;
+            this.DurationBeforeItFlashes = durationBeforeItFlashes;
         }
 
         public LampType getLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  
         {                                                 //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
-            lampType = Enum.Parse<LampType>(lamptype);    //restituisce il valore dell’enum corrispondente.
-            return lampType;
+            LampType = Enum.Parse<LampType>(lamptype);    //restituisce il valore dell’enum corrispondente.
+            return LampType;
         }
 
+        public virtual void getEnergyClass (string energyClass)       
+        {                
+            this.EnergyClass = Enum.Parse<EnergyClass>(energyClass);
+        }
 
+        public void turnOn_Off()   //Cambia lo stato della lampada (accesa/spenta)
+        {
+            if (IsOn == true)
+            {
+                IsOn = false;
+            }
+            else
+            {
+                IsOn = true;
+            }
+        }
 
-        public void getBrightness(int brightness)
+        public void changeColor(string color)   //Cambia il colore della lampada
+        {
+            if (LampType == LampType.led)
+            {
+                this.Color = Enum.Parse<Color>(color);
+            }
+            else
+            {
+                throw new InvalidOperationException("Color can be changed only for LED lamps.");
+            }
+        }
+
+        public void setBrightness(int brightness)
         {
             if (brightness >= minBrightenes && brightness <= maxBrightenes)
             {
