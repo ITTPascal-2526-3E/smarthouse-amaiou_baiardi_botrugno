@@ -8,60 +8,91 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 {
     public class Fryer
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        private string type;// a olio o ad aria
-
-        public string typeProperty
-        {
-            get { return type; }
-            set
-            {
-                if (type == "olio" || type == "aria")
-                {
-                    type = value;
-                }
-            }
-        }
-
-        public bool isOn = false;
-        private string basketStatus = "down";  // status basket può essere down o up
-        private double temperature { get; set; }
-        public int numberOfFryerBeforeChangeOil { get; set; }
+        //Creazione variabili/attributi
+        public Guid Id { get; private set; }
+        public string Type { get; protected set; }
+        public bool IsOn { get; protected set; }
+        public bool BasketStatusUp { get;private set; }
+        public double Temperature { get;private set; }
 
         private double minTemp = 160.0; // temperature standard di una friggitrice vera prese da Google
         private double maxTemp = 220.0;
 
-        private int max_numberOfFryer_BeforeChangeOil = 10;
-        private int min_numberOfFryer_BeforeChangeOil = 3;
+        private int numberOfFryer_BeforeChangeOil = 3;// numero di utilizzi prima di dover cambiare l'olio
+        private int currentNumberOfOilUses = 3;// numero di utilizzi rimanenti prima di dover cambiare l'olio
 
-        public void changeStatus()
+        //Costruttore di Fryer
+        public Fryer()
         {
-            isOn = true;
+            Id = new Guid();
+            IsOn = false;
         }
 
-        public void changeBasketStatus()
+        //Metodo per settare il tipo di friggitrice limitato a olio o aria
+        public void setType(string type)
         {
-            basketStatus = "up";
+            if(type == "oil" || type == "air")
+            {
+                Type = type;
+            }
+            else
+            {
+                throw new InvalidOperationException("the frier type can only be oil or air");
+            }
         }
 
+        //Cambia lo stato della friggitrice (accesa/spenta)
+        public void turnOn_Off()   
+        {
+            if (IsOn == true)
+            {
+                IsOn = false;
+            }
+            else
+            {
+                IsOn = true;
+            }
+        }
+
+        //Cambia lo stato del cestello (su/giù)
+        public void basketStatus()   
+        {
+            if (currentNumberOfOilUses == 0)
+            {
+                throw new InvalidOperationException("You need to change the oil before using the fryer.");
+            }
+            else
+            {
+                if (BasketStatusUp == true)
+                {
+                    BasketStatusUp = false;
+                }
+                else
+                {
+                    BasketStatusUp = true;
+                }
+            }
+        }
+
+        //Cambia la temperatura della friggitrice entro i limiti prestabiliti
         public void changeTemp(double value)
         {
             if (value >= minTemp && value <= maxTemp)
-            { temperature = value; }
+            { 
+                Temperature = value; 
+            }
             else
             {
                 throw new ArgumentOutOfRangeException("Temperature must be between 160 and 220 degrees Celsius.");
             }
         }
 
-        public void change_NumberOfFryer_BeforeChangeOil(int value)
+        //Cambia l'olio della friggitrice resettando il contatore degli utilizzi
+        public void changeOil()
         {
-            if (value >= min_numberOfFryer_BeforeChangeOil && value <= max_numberOfFryer_BeforeChangeOil)
-            { numberOfFryerBeforeChangeOil = value; }
-            else
-            {
-                throw new ArgumentOutOfRangeException($"Number of fryings before changing oil must be between {min_numberOfFryer_BeforeChangeOil} and {max_numberOfFryer_BeforeChangeOil}.");
-            }
-        }
+            currentNumberOfOilUses = numberOfFryer_BeforeChangeOil;
+        }   
+
+
     }
 }

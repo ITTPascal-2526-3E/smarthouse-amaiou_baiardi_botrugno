@@ -12,8 +12,8 @@ class Program
     {
         Guid id = Guid.NewGuid();
         Lamp lamp = new Lamp(35.0, 800, 5000);
-        lamp.getLampType("led");
-        lamp.getEnergyClass("A");
+        lamp.setLampType("led");
+        lamp.setEnergyClass("A");
         lamp.turnOn_Off();
         Console.WriteLine(lamp.IsOn);
         lamp.changeColor("red");
@@ -25,8 +25,8 @@ class Program
 
         
         EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000);
-        ecoLamp.getLampType("led");
-        ecoLamp.getEnergyClass("Aaa");
+        ecoLamp.setLampType("led");
+        ecoLamp.setEnergyClass("Aaa");
         ecoLamp.changeColor("blue");
         ecoLamp.turnOn_Off();
         ecoLamp.turnOffAfterDuration(120);  
@@ -40,9 +40,9 @@ class Program
 
         TwoLampsDevice twoLampDevice = new TwoLampsDevice();
         Lamp lamp2 = new Lamp(35.0, 200, 5000);
-        twoLampDevice.getLampAttributes(lamp2);
-        twoLampDevice.getLampType("led");
-        twoLampDevice.getEnergyClass("B");
+        twoLampDevice.setLampAttributes(lamp2);
+        twoLampDevice.setLampType("led");
+        twoLampDevice.setEnergyClass("B");
         twoLampDevice.turnOn_Off();
         twoLampDevice.changeColor("green");
         twoLampDevice.setBrightness(50);
@@ -50,9 +50,9 @@ class Program
         Console.WriteLine("Lampada 1 - Colore: " + lamp2.Color);
         Console.WriteLine("Lampada 1 - Luminosità: " + lamp2.brightness);
         EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000);
-        twoLampDevice.getEcoLampAttributes(ecoLamp2);
-        twoLampDevice.getEcoLampType("led");
-        twoLampDevice.getEcoLampEnergyClass("Aaa");
+        twoLampDevice.setEcoLampAttributes(ecoLamp2);
+        twoLampDevice.setEcoLampType("led");
+        twoLampDevice.setEcoLampEnergyClass("Aaa");
         twoLampDevice.ecoLampTurnOn_Off();
         twoLampDevice.ecoLampChangeColor("yellow");
         twoLampDevice.ecoLampSetBrightness(80);
@@ -133,18 +133,15 @@ class Program
 
 
         Fryer fryer = new Fryer();
-        fryer.changeStatus();
-        Console.WriteLine("Stato friggitrice cambiato: ");
-        fryer.changeBasketStatus();
-        Console.WriteLine("Stato cestello friggitrice cambiato: ");
-        fryer.changeTemp(180.0);
-        Console.WriteLine("Temperatura friggitrice cambiata: ");
-        fryer.change_NumberOfFryer_BeforeChangeOil(5);
-        Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
-        fryer.typeProperty = "olio";
-        Console.WriteLine("Tipo di friggitrice cambiato: " + fryer.typeProperty);
-        Console.WriteLine("ID Friggitrice: " + fryer.Id);
-
+        fryer.turnOn_Off();
+        Console.WriteLine("Friggitrice accesa: " + fryer.IsOn);
+        fryer.changeTemp(180);
+        Console.WriteLine("Temperatura friggitrice impostata a: " + fryer.Temperature);
+        fryer.changeOil();
+        Console.WriteLine("Olio della friggitrice cambiato.");
+        fryer.basketStatus();
+        Console.WriteLine(fryer.BasketStatusUp);
+        
 
 
 

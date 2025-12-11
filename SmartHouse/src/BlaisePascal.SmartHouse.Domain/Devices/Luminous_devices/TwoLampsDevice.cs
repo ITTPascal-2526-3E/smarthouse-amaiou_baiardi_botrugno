@@ -14,21 +14,21 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0);
 
         //chiama il costruttore della classe Lamp e assegna l'istanza alla variabile lamp
-        public void getLampAttributes(Lamp lamp)
+        public void setLampAttributes(Lamp lamp)
         {
             this.lamp = lamp;
         }
 
         //usa il metodo per ottenere il tipo di lampada
-        public void getLampType(string lampTypeValue)
+        public void setLampType(string lampTypeValue)
         {
-            lamp.getLampType(lampTypeValue);
+            lamp.setLampType(lampTypeValue);
         }
 
         //usa il metodo per ottenere la classe energetica
-        public void getEnergyClass(string energyClassValue)
+        public void setEnergyClass(string energyClassValue)
         {
-            lamp.getEnergyClass(energyClassValue);
+            lamp.setEnergyClass(energyClassValue);
         }
 
         //usa il metodo per accendere/spegnere la lampada
@@ -50,21 +50,21 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         }
 
         //chiama il costruttore della classe EcoLamp e assegna l'istanza alla variabile ecoLamp
-        public void getEcoLampAttributes(EcoLamp ecoLamp)
+        public void setEcoLampAttributes(EcoLamp ecoLamp)
         {
             this.ecoLamp = ecoLamp;
         }
 
         //usa il metodo per ottenere il tipo di lampada eco
-        public void getEcoLampType(string lampTypeValue)
+        public void setEcoLampType(string lampTypeValue)
         {
-            ecoLamp.getLampType(lampTypeValue);
+            ecoLamp.setLampType(lampTypeValue);
         }
 
         //usa il metodo per ottenere la classe energetica della lampada eco
-        public void getEcoLampEnergyClass(string energyClassValue)
+        public void setEcoLampEnergyClass(string energyClassValue)
         {
-            ecoLamp.getEnergyClass(energyClassValue);
+            ecoLamp.setEnergyClass(energyClassValue);
         }
 
         //usa il metodo per accendere/spegnere la lampada eco

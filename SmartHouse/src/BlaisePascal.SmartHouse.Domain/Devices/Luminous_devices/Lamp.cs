@@ -17,7 +17,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 
         private int minBrightenes = 0;
         private int maxBrightenes = 100;
-        
+
+        //Costruttore di Lamp
         public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes)
         {
             Id = Guid.NewGuid();
@@ -27,18 +28,19 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.DurationBeforeItFlashes = durationBeforeItFlashes;
         }
 
-        public LampType getLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  
+        public LampType setLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  
         {                                                 //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
             LampType = Enum.Parse<LampType>(lamptype);    //restituisce il valore dell’enum corrispondente.
             return LampType;
         }
 
-        public virtual void getEnergyClass (string energyClass)       
+        public virtual void setEnergyClass (string energyClass)       
         {                
             this.EnergyClass = Enum.Parse<EnergyClass>(energyClass);
         }
 
-        public void turnOn_Off()   //Cambia lo stato della lampada (accesa/spenta)
+        //Cambia lo stato della lampada (accesa/spenta)
+        public void turnOn_Off()   
         {
             if (IsOn == true)
             {
@@ -50,8 +52,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
         }
 
-        public void changeColor(string color)   //Cambia il colore della lampada
-        {
+        //Cambia il colore della lampada
+        public void changeColor(string color)   
+        { 
             if (LampType == LampType.led)
             {
                 this.Color = Enum.Parse<Color>(color);
@@ -62,6 +65,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             }
         }
 
+        //Imposta la luminosità della lampada
         public void setBrightness(int brightness)
         {
             if (brightness >= minBrightenes && brightness <= maxBrightenes)

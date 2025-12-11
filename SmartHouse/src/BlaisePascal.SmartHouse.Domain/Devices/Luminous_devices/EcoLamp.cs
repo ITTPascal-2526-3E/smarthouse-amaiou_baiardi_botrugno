@@ -10,6 +10,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
     {
         //Creazione variabili/attributi
         public int DurationBeforeOff { get; private set; }
+        //Costruttore di EcoLamp
         public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes) 
             : base(lampHeat, lumen, durationBeforeItFlashes)
         {
@@ -38,7 +39,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         }
 
         //Metodo per settare la classe energetica limitata alle classi A, A+, A++, A+++
-        public override void getEnergyClass(string energyClassValue)
+        public override void setEnergyClass(string energyClassValue)
         {
             if (energyClassValue == "A")
             {
