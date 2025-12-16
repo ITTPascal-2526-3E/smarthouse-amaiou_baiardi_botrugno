@@ -67,7 +67,7 @@ class Program
 
 
 
-        AirConditioner airConditioner = new AirConditioner();
+        AirConditioner airConditioner = new AirConditioner(18.00);
         airConditioner.setName("Samsung WindFree");
         airConditioner.turnOn();
         Console.WriteLine("AC acceso: " + airConditioner.isOn);
@@ -100,7 +100,7 @@ class Program
         thermostat.setName();
         Console.WriteLine(thermostat.Id);
 
-        Door door = new Door();
+        Door door = new Door(true, "acciaio", "inox", true, false, false, 10.0, 5.0, 4.0);
         door.changeDoorState();
         Console.WriteLine("Stato porta cambiato: ");
         door.changeLength(6.00);
@@ -117,7 +117,7 @@ class Program
         Console.WriteLine("Porta interna cambiata: ");
 
 
-        CCTV cctv = new CCTV();
+        CCTV cctv = new CCTV(200, 400, 60, 128, false, false);
         cctv.changeStatus();
         Console.WriteLine("Stato CCTV cambiato: ");
         cctv.change_nightVision();
@@ -130,18 +130,23 @@ class Program
         Console.WriteLine("Larghezza risoluzione CCTV cambiata: ");
         cctv.changeHeight(1080);
         Console.WriteLine("Altezza risoluzione CCTV cambiata: ");
+        cctv.change_bulletProof();
+        Console.WriteLine("CCTV antiproiettile cambiata: ");
 
 
-        Fryer fryer = new Fryer();
-        fryer.turnOn_Off();
-        Console.WriteLine("Friggitrice accesa: " + fryer.IsOn);
-        fryer.changeTemp(180);
-        Console.WriteLine("Temperatura friggitrice impostata a: " + fryer.Temperature);
-        fryer.changeOil();
-        Console.WriteLine("Olio della friggitrice cambiato.");
-        fryer.basketStatus();
-        Console.WriteLine(fryer.BasketStatusUp);
-        
+        Fryer fryer = new Fryer(180.00, 7);
+        fryer.changeStatus();
+        Console.WriteLine("Stato friggitrice cambiato: ");
+        fryer.changeBasketStatus();
+        Console.WriteLine("Stato cestello friggitrice cambiato: ");
+        fryer.changeTemp(180.0);
+        Console.WriteLine("Temperatura friggitrice cambiata: ");
+        fryer.change_NumberOfFryer_BeforeChangeOil(5);
+        Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
+        fryer.typeProperty = "olio";
+        Console.WriteLine("Tipo di friggitrice cambiato: " + fryer.typeProperty);
+        Console.WriteLine("ID Friggitrice: " + fryer.Id);
+
 
 
 

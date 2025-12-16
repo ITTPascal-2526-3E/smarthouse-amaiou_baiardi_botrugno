@@ -13,16 +13,39 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOn = false;
         public double temp { get; set; }
-        private double minTemp = 16.0;
-        private double maxTemp = 25.0;
+        private const double minTemp = 16.0;
+        private const double maxTemp = 25.0;
         public enum funSpeed { Low, Medium, High }
         public bool energySavingMode = false;
         private string name = " ";
 
+
+        public AirConditioner(double initialTemp)
+        {
+            Id = Guid.NewGuid();
+            isOn = false;
+            if (initialTemp >= minTemp && initialTemp <= maxTemp)
+            {
+                temp = initialTemp;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException($"Initial temperature must be between {minTemp} and {maxTemp} degrees Celsius.");
+            }
+        }
+
         public void turnOn()
         {
-            isOn = true;
+            if (isOn == false)
+            {
+                isOn = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is already on.");
+            }
         }
+
         public void turnOff(int time)
         {
             if (isOn == true && time > 0 && time <= 30)
@@ -36,10 +59,21 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 
                 }
             }
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is already off or invalid time specified.");
+            }
         }
         public void PutInEnergySavingMode()
         {
-            energySavingMode = true;
+            if (energySavingMode == false)
+            {
+                energySavingMode = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("AirConditioner is already in energy saving mode.");
+            }
         }
 
         public void changefunspeed()
@@ -96,7 +130,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         }
         public void setName(string airConditionerName)
         {
-            name = airConditionerName;
+            if (string.IsNullOrWhiteSpace(airConditionerName))
+            {
+                throw new ArgumentException("Name cannot be null or empty.", nameof(airConditionerName));
+            }
+            else
+            {
+                name = airConditionerName;
+            }
         }
 
     }
