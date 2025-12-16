@@ -10,32 +10,42 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public LampType LampType { get; protected set; }
         public double LampHeat { get; protected set; }
         public EnergyClass EnergyClass { get;protected set; }
-        public int brightness;
+        public int brightness { get; set; }
         public int Lumen { get;protected set; }
         public Color Color { get; protected set; }
         public int DurationBeforeItFlashes { get; protected set; }
 
-        private int minBrightenes = 0;
-        private int maxBrightenes = 100;
+        private const int minBrightenes = 0;
+        private const int maxBrightenes = 100;
 
         //Costruttore di Lamp
-        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes)
+        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness)
         {
             Id = Guid.NewGuid();
             IsOn = false;
             this.LampHeat = lampHeat;
             this.Lumen = lumen;
             this.DurationBeforeItFlashes = durationBeforeItFlashes;
+            this.brightness = Initialbrightness;    
         }
-
+        //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
+        //restituisce il valore dell’enum corrispondente.
         public LampType setLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  
-        {                                                 //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
-            LampType = Enum.Parse<LampType>(lamptype);    //restituisce il valore dell’enum corrispondente.
+        {                                    
+            if(!Enum.IsDefined(typeof(LampType), lamptype))  
+            {
+                throw new ArgumentException("Invalid lamp type");
+            }
+            LampType = Enum.Parse<LampType>(lamptype);    
             return LampType;
         }
 
         public virtual void setEnergyClass (string energyClass)       
-        {                
+        {              
+            if (!Enum.IsDefined(typeof(EnergyClass), energyClass))
+            {
+                throw new ArgumentException("Invalid energy class");
+            }
             this.EnergyClass = Enum.Parse<EnergyClass>(energyClass);
         }
 

@@ -11,17 +11,15 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         //Creazione variabili/attributi
         public int DurationBeforeOff { get; private set; }
         //Costruttore di EcoLamp
-        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes) 
-            : base(lampHeat, lumen, durationBeforeItFlashes)
+        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes, int InitialBrightness) : base(lampHeat, lumen, durationBeforeItFlashes, InitialBrightness)
         {
             Id = Guid.NewGuid();
             IsOn = false;
             this.Lumen = lumen;
             this.LampHeat = lampHeat;
+            this.DurationBeforeItFlashes = durationBeforeItFlashes;
+            this.brightness = InitialBrightness;
         }
-
-
-
 
 
         //Metodo per settare il tempo dopo il quale la lampada si spegne
@@ -30,6 +28,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             if (duration >= 60)
             {
                 DurationBeforeOff = duration;
+                
+                for (int i = 0; i == duration; i++)
+                {
+                    // Simula il passare del tempo
+                }
 
             }
             else

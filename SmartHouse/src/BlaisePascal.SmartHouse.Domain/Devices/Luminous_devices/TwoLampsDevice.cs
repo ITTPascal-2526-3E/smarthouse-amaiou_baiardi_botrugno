@@ -10,8 +10,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public class TwoLampsDevice
     {
-        private Lamp lamp = new Lamp(0.0, 0, 0);
-        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0);
+        private Lamp lamp = new Lamp(0.0, 0, 0, 6);
+        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6);
 
         //chiama il costruttore della classe Lamp e assegna l'istanza alla variabile lamp
         public void setLampAttributes(Lamp lamp)
@@ -44,9 +44,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         }
 
         //usa il metodo per impostare la luminosità della lampada
-        public void setBrightness(int brightnessValue)
+        public void setBrightness(int brightness)
         {
-            lamp.brightness = brightnessValue;
+            lamp.brightness = brightness;
         }
 
         //chiama il costruttore della classe EcoLamp e assegna l'istanza alla variabile ecoLamp

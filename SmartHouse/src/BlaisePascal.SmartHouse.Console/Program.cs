@@ -11,7 +11,7 @@ class Program
     static void Main(string[] args)
     {
         Guid id = Guid.NewGuid();
-        Lamp lamp = new Lamp(35.0, 800, 5000);
+        Lamp lamp = new Lamp(35.0, 800, 5000,60);
         lamp.setLampType("led");
         lamp.setEnergyClass("A");
         lamp.turnOn_Off();
@@ -24,7 +24,7 @@ class Program
 
 
         
-        EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000);
+        EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000,60);
         ecoLamp.setLampType("led");
         ecoLamp.setEnergyClass("Aaa");
         ecoLamp.changeColor("blue");
@@ -39,7 +39,7 @@ class Program
 
 
         TwoLampsDevice twoLampDevice = new TwoLampsDevice();
-        Lamp lamp2 = new Lamp(35.0, 200, 5000);
+        Lamp lamp2 = new Lamp(35.0, 200, 5000, 60);
         twoLampDevice.setLampAttributes(lamp2);
         twoLampDevice.setLampType("led");
         twoLampDevice.setEnergyClass("B");
@@ -49,7 +49,7 @@ class Program
         Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.IsOn);
         Console.WriteLine("Lampada 1 - Colore: " + lamp2.Color);
         Console.WriteLine("Lampada 1 - Luminosità: " + lamp2.brightness);
-        EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000);
+        EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000, 60);
         twoLampDevice.setEcoLampAttributes(ecoLamp2);
         twoLampDevice.setEcoLampType("led");
         twoLampDevice.setEcoLampEnergyClass("Aaa");
