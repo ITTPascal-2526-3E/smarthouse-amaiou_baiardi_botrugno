@@ -29,11 +29,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             {
                 DurationBeforeOff = duration;
                 
-                for (int i = 0; i == duration; i++)
-                {
-                    // Simula il passare del tempo
-                }
-
             }
             else
             {
