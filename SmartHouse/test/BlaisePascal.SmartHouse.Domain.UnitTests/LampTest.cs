@@ -1,12 +1,127 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xunit;
+using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
 
-namespace BlaisePascal.SmartHouse.Domain.UnitTests
+namespace BlaisePascal.SmartHouse.Tests
 {
-    internal class LampTest
+    public class LampTests
     {
+        
+
+        [Fact]
+        public void Constructor_InitializesLampCorrectly()
+        {
+            Lamp lamp = new Lamp(40.5, 800, 10, 50);
+
+            Assert.False(lamp.IsOn);
+            Assert.Equal(40.5, lamp.LampHeat);
+            Assert.Equal(800, lamp.Lumen);
+            Assert.Equal(10, lamp.DurationBeforeItFlashes);
+            Assert.Equal(50, lamp.brightness);
+        }
+
+       
+
+        [Fact]
+        public void SetLampType_WithValidType_SetsLampType()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            LampType result = lamp.setLampType("led");
+
+            Assert.Equal(LampType.led, result);
+        }
+
+        [Fact]
+        public void SetLampType_WithInvalidType_ThrowsException()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                lamp.setLampType("InvalidType");
+            });
+        }
+
+       
+
+        [Fact]
+        public void SetEnergyClass_WithValidClass_SetsEnergyClass()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            lamp.setEnergyClass("A");
+
+            Assert.Equal(EnergyClass.A, lamp.EnergyClass);
+        }
+
+        [Fact]
+        public void SetEnergyClass_WithInvalidClass_ThrowsException()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                lamp.setEnergyClass("Z");
+            });
+        }
+
+        
+
+        [Fact]
+        public void ChangeColor_WhenLampIsLed_ChangesColor()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+            lamp.setLampType("led");
+
+            lamp.changeColor("Red");
+
+            Assert.Equal(Color.red, lamp.Color);
+        }
+
+        [Fact]
+        public void ChangeColor_WhenLampIsNotLed_ThrowsException()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+            lamp.setLampType("halogen");
+
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                lamp.changeColor("Blue");
+            });
+        }
+
+       
+        [Fact]
+        public void SetBrightness_WithValidValue_SetsBrightness()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            lamp.setBrightness(80);
+
+            Assert.Equal(80, lamp.brightness);
+        }
+
+        [Fact]
+        public void SetBrightness_TooLow_ThrowsException()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                lamp.setBrightness(-1);
+            });
+        }
+
+        [Fact]
+        public void SetBrightness_TooHigh_ThrowsException()
+        {
+            Lamp lamp = new Lamp(40, 600, 5, 30);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                lamp.setBrightness(101);
+            });
+        }
     }
 }
