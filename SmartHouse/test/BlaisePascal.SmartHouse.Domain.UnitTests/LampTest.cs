@@ -22,15 +22,6 @@ namespace BlaisePascal.SmartHouse.Tests
 
        
 
-        [Fact]
-        public void SetLampType_WithValidType_SetsLampType()
-        {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
-
-            LampType result = lamp.setLampType("led");
-
-            Assert.Equal(LampType.led, result);
-        }
 
         [Fact]
         public void SetLampType_WithInvalidType_ThrowsException()

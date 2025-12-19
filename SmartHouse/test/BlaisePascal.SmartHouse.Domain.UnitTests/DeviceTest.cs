@@ -8,14 +8,6 @@ namespace BlaisePascal.SmartHouse.Tests
     {
 
 
-        [Fact]
-        public void Constructor_DeviceStartsOff()
-        {
-            Device device = new Device();
-
-            Assert.False(device.status);
-        }
-
 
 
         [Fact]

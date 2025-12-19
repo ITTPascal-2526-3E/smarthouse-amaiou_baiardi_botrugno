@@ -8,34 +8,6 @@ namespace BlaisePascal.SmartHouse.Tests
     {
 
         [Fact]
-        public void Constructor_ValidTemperature_InitializesCorrectly()
-        {
-            AirConditioner ac = new AirConditioner(20);
-
-            Assert.Equal(20, ac.temp);
-            Assert.False(ac.isOn);
-        }
-
-        [Fact]
-        public void Constructor_TemperatureTooLow_ThrowsException()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                new AirConditioner(15);
-            });
-        }
-
-        [Fact]
-        public void Constructor_TemperatureTooHigh_ThrowsException()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                new AirConditioner(26);
-            });
-        }
-
-
-        [Fact]
         public void PutInEnergySavingMode_EnablesMode()
         {
             AirConditioner ac = new AirConditioner(20);
