@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0F28BDA4-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaisePascal.SmartHouse.Domain.UnitTests", "test\BlaisePascal.SmartHouse.Domain.UnitTests\BlaisePascal.SmartHouse.Domain.UnitTests.csproj", "{0CE0E813-DAA5-4EB6-9CBB-CC53CC3C4BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceTest", "test\DeviceTest\DeviceTest.csproj", "{9EC59527-1AA2-4491-8F19-5D1C0DC64347}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,10 +36,6 @@ Global
 		{0CE0E813-DAA5-4EB6-9CBB-CC53CC3C4BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE0E813-DAA5-4EB6-9CBB-CC53CC3C4BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE0E813-DAA5-4EB6-9CBB-CC53CC3C4BFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9EC59527-1AA2-4491-8F19-5D1C0DC64347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9EC59527-1AA2-4491-8F19-5D1C0DC64347}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9EC59527-1AA2-4491-8F19-5D1C0DC64347}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9EC59527-1AA2-4491-8F19-5D1C0DC64347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,7 +44,6 @@ Global
 		{AB4A86F7-0AA0-4BA3-9F34-67E5158012FD} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
 		{B7DF03AA-3A9B-4FD3-8F29-2F4012B3D359} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
 		{0CE0E813-DAA5-4EB6-9CBB-CC53CC3C4BFA} = {0F28BDA4-B707-4CB5-A7E6-B09053974717}
-		{9EC59527-1AA2-4491-8F19-5D1C0DC64347} = {0F28BDA4-B707-4CB5-A7E6-B09053974717}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {903E8477-79DC-4FEC-81A6-F905EA74D402}

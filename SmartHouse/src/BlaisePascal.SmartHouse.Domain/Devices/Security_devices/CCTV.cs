@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
-    public class CCTV
+    public class CCTV : Device
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -52,18 +52,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             }
         }
 
-        public void changeStatus()
-        {
-            if (isOn == true)
-            {
-                isOn = false;
-            }
-            else
-            {
-                isOn = true;
-            }
-        }
-
+      
         public void change_nightVision()
         {
             if (isOn == true)

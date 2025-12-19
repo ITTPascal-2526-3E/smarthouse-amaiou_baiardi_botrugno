@@ -8,7 +8,7 @@ using static BlaisePascal.SmartHouse.Domain.Devices.Temp_devices.AirConditioner;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 {
-    public class AirConditioner
+    public class AirConditioner : Device
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOn = false;
@@ -34,36 +34,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
             }
         }
 
-        public void turnOn()
-        {
-            if (isOn == false)
-            {
-                isOn = true;
-            }
-            else
-            {
-                throw new InvalidOperationException("AirConditioner is already on.");
-            }
-        }
-
-        public void turnOff(int time)
-        {
-            if (isOn == true && time > 0 && time <= 30)
-            {
-                for (int i = 0; i == time; i++)
-                {
-                    if (i == time)
-                    {
-                        isOn = false;
-                    }
-
-                }
-            }
-            else
-            {
-                throw new InvalidOperationException("AirConditioner is already off or invalid time specified.");
-            }
-        }
+     
         public void PutInEnergySavingMode()
         {
             if (energySavingMode == false)

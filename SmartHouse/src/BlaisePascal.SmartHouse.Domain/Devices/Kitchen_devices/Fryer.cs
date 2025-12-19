@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 {
-    public class Fryer
+    public class Fryer : Device
     {
         private string type;// a olio o ad aria
         public bool isOn = false;
@@ -41,15 +41,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
                 this.type = type;
             }
         }   
-        public void changeStatus()
-        {
-            if (isOn == true)
-            {
-                isOn = false;
-            }
-            else
-                isOn = true;
-        }
+     
 
         public void changeBasketStatus()
         {

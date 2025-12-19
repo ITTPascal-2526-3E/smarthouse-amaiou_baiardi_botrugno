@@ -2,7 +2,7 @@
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public class Lamp
+    public class Lamp : Device
     {
         //Creazione variabili/attributi
         public Guid Id { get; protected set; }
@@ -49,18 +49,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.EnergyClass = Enum.Parse<EnergyClass>(energyClass);
         }
 
-        //Cambia lo stato della lampada (accesa/spenta)
-        public void turnOn_Off()   
-        {
-            if (IsOn == true)
-            {
-                IsOn = false;
-            }
-            else
-            {
-                IsOn = true;
-            }
-        }
+       
 
         //Cambia il colore della lampada
         public void changeColor(string color)   
