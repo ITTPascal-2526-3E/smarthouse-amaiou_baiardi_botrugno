@@ -8,23 +8,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 {
     public class Fryer
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
         private string type;// a olio o ad aria
-
-        public string typeProperty
-        {
-            get { return type; }
-            set
-            {
-                if (type == "olio" || type == "aria")
-                {
-                    type = value;
-                }
-            }
-        }
-
         public bool isOn = false;
-        private string basketStatus = "down";  // status basket può essere down o up
+        private string basketStatus;  // status basket può essere down o up
         private double temperature { get; set; }
         public int numberOfFryerBeforeChangeOil { get; set; }
 
@@ -34,15 +20,27 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
         private const int max_numberOfFryer_BeforeChangeOil = 10;
         private const int min_numberOfFryer_BeforeChangeOil = 3;
 
+        
         public Fryer(double startTemperature, int defaultNumberOfFryerBeforeChangeOil)
         {
-            Id = Guid.NewGuid();
+            
             isOn = false;
             basketStatus = "down";
             temperature = startTemperature; // temperatura di default
             numberOfFryerBeforeChangeOil = defaultNumberOfFryerBeforeChangeOil; // numero di fritture di default
         }
 
+        public void setFryerType(string type)
+        {
+            if (type != "oil" && type != "air")
+            {
+                throw new ArgumentException("Invalid fryer type. It must be either 'oil' or 'air'.");
+            }
+            else
+            {
+                this.type = type;
+            }
+        }   
         public void changeStatus()
         {
             if (isOn == true)
