@@ -8,18 +8,34 @@ namespace BlaisePascal.SmartHouse.Domain.Devices
 {
     public class Device 
     {
-        public Guid id { get; protected set; }
-        public string name { get; protected set; }
+       
         public bool status { get; protected set; }
-        public string timeOfCreation { get; protected set; }
-        public string lastTimeModified { get; protected set; }
-        public Device(string Name, bool Status, string TimeOfCreation,string LastTimeModified) 
+      
+        public Device() 
         { 
-            id = Guid.NewGuid();
-            name = Name;
-            status = Status;
-            timeOfCreation = TimeOfCreation;
-            lastTimeModified = LastTimeModified;
+            status = false;
+        }
+        public void TurnOn()
+        {
+            if (status == false)
+            {
+                status = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already on.");
+            }
+        }
+        public void TurnOff()
+        {
+            if (status == true)
+            {
+                status = false;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already off.");
+            }
         }
     }
 }

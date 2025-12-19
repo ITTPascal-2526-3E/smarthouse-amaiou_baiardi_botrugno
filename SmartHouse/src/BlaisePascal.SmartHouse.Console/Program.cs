@@ -97,7 +97,7 @@ class Program
         Console.WriteLine("Temperatura aumentata tramite termostato.");
         thermostat.decreaseAirConditionerTemp();
         Console.WriteLine("Temperatura diminuita tramite termostato.");
-        thermostat.setName();
+        thermostat.setName("Airconditioner");
         Console.WriteLine(thermostat.Id);
 
         Door door = new Door(true, "acciaio", "inox", true, false, false, 10.0, 5.0, 4.0);
