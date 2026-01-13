@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices
 {
-    public class Device 
+    public abstract class Device 
     {
        
         public bool status { get; protected set; }
@@ -15,27 +15,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices
         { 
             status = false;
         }
-        public void TurnOn()
-        {
-            if (status == false)
-            {
-                status = true;
-            }
-            else
-            {
-                throw new InvalidOperationException("Device is already on.");
-            }
-        }
-        public void TurnOff()
-        {
-            if (status == true)
-            {
-                status = false;
-            }
-            else
-            {
-                throw new InvalidOperationException("Device is already off.");
-            }
-        }
+        public abstract void TurnOn();
+
+        public abstract void TurnOff();
     }
 }

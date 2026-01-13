@@ -28,6 +28,29 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.DurationBeforeItFlashes = durationBeforeItFlashes;
             this.brightness = Initialbrightness;    
         }
+        // accendi e spegni la lampada
+        public override void TurnOn()
+        {
+            if (status == false)
+            {
+                status = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already on.");
+            }
+        }
+        public override void TurnOff()
+        {
+            if (status == true)
+            {
+                status = false;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already off.");
+            }
+        }
         //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
         //restituisce il valore dell’enum corrispondente.
         public LampType setLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  

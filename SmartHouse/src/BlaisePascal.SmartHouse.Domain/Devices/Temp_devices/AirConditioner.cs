@@ -11,7 +11,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
     public class AirConditioner : Device
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public bool isOn = false;
         public double temp { get; set; }
         private const double minTemp = 16.0;
         private const double maxTemp = 25.0;
@@ -23,7 +22,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         public AirConditioner(double initialTemp)
         {
             Id = Guid.NewGuid();
-            isOn = false;
             if (initialTemp >= minTemp && initialTemp <= maxTemp)
             {
                 temp = initialTemp;
@@ -34,7 +32,29 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
             }
         }
 
-     
+        public override void TurnOn()
+        {
+            if (status == false)
+            {
+                status = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already on.");
+            }
+        }
+        public override void TurnOff()
+        {
+            if (status == true)
+            {
+                status = false;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already off.");
+            }
+        }
+
         public void PutInEnergySavingMode()
         {
             if (energySavingMode == false)
@@ -49,7 +69,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 
         public void changefunspeed()
         {
-            if (isOn == true)
+            if (status == true)
             {
                 funSpeed currentSpeed = funSpeed.Low;
                 switch (currentSpeed)
@@ -73,7 +93,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         }
         public void increaseTemp()
         {
-            if (isOn == true)
+            if (status == true)
             {
                 if (temp < maxTemp)
                 {
@@ -87,7 +107,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         }
         public void decreaseTemp()
         {
-            if (isOn == true)
+            if (status == true)
             {
                 if (temp > minTemp)
                 {

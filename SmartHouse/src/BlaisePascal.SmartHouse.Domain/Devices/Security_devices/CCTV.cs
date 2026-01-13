@@ -35,6 +35,28 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             this.bulletProof = StartBulletProof;
 
         }
+        public override void TurnOn()
+        {
+            if (status == false)
+            {
+                status = true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already on.");
+            }
+        }
+        public override void TurnOff()
+        {
+            if (status == true)
+            {
+                status = false;
+            }
+            else
+            {
+                throw new InvalidOperationException("Device is already off.");
+            }
+        }
 
         public int storageCapacity_Property
         {

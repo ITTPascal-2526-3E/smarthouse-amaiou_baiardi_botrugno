@@ -14,27 +14,29 @@ class Program
         Lamp lamp = new Lamp(35.0, 800, 5000,60);
         lamp.setLampType("led");
         lamp.setEnergyClass("A");
-        lamp.turnOn_Off();
+        lamp.TurnOn();
         Console.WriteLine(lamp.IsOn);
         lamp.changeColor("red");
         Console.WriteLine(lamp.Color);
         lamp.setBrightness(70); // Updated to match the correct property name
         Console.WriteLine(lamp.brightness);
+        lamp.TurnOff();
 
 
 
-        
+
         EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000,60);
         ecoLamp.setLampType("led");
         ecoLamp.setEnergyClass("Aaa");
         ecoLamp.changeColor("blue");
-        ecoLamp.turnOn_Off();
+        ecoLamp.TurnOn();
         ecoLamp.turnOffAfterDuration(120);  
         Console.WriteLine(ecoLamp.IsOn);
         Console.WriteLine(ecoLamp.Color);
         Console.WriteLine(ecoLamp.Id);
         Console.WriteLine(ecoLamp.EnergyClass);
         Console.WriteLine(ecoLamp.LampType);
+        ecoLamp.TurnOff();
 
 
 
@@ -69,8 +71,8 @@ class Program
 
         AirConditioner airConditioner = new AirConditioner(18.00);
         airConditioner.setName("Samsung WindFree");
-        airConditioner.turnOn();
-        Console.WriteLine("AC acceso: " + airConditioner.isOn);
+        airConditioner.TurnOn();
+        Console.WriteLine("AC acceso: " + airConditioner.status);
         airConditioner.temp = 20.0;
         Console.WriteLine("Temperatura iniziale: " + airConditioner.temp);
         airConditioner.increaseTemp();
@@ -118,8 +120,8 @@ class Program
 
 
         CCTV cctv = new CCTV(200, 400, 60, 128, false, false);
-        cctv.changeStatus();
-        Console.WriteLine("Stato CCTV cambiato: ");
+        cctv.TurnOn();
+        Console.WriteLine("CCTV è accesa " + cctv.status);
         cctv.change_nightVision();
         Console.WriteLine("Visione notturna CCTV cambiata: ");
         cctv.change_bulletProof();
@@ -134,17 +136,15 @@ class Program
         Console.WriteLine("CCTV antiproiettile cambiata: ");
 
 
-        Fryer fryer = new Fryer(180.00, 7);
-        fryer.changeStatus();
-        Console.WriteLine("Stato friggitrice cambiato: ");
+        Fryer fryer = new Fryer(180.00, 7, "olio");
+        fryer.TurnOn();
+        Console.WriteLine("Stato friggitrice cambiato " + fryer.status);
         fryer.changeBasketStatus();
         Console.WriteLine("Stato cestello friggitrice cambiato: ");
         fryer.changeTemp(180.0);
         Console.WriteLine("Temperatura friggitrice cambiata: ");
         fryer.change_NumberOfFryer_BeforeChangeOil(5);
         Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
-        fryer.typeProperty = "olio";
-        Console.WriteLine("Tipo di friggitrice cambiato: " + fryer.typeProperty);
         Console.WriteLine("ID Friggitrice: " + fryer.Id);
 
 
