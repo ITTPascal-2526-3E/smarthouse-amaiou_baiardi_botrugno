@@ -9,7 +9,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public bool IsOn { get; protected set; }
         public LampType LampType { get; protected set; }
         public double LampHeat { get; protected set; }
-        public EnergyClass EnergyClass { get;protected set; }
+        public EnergyClass EnergyClass { get; protected set; }
         public int brightness { get; set; }
         public int Lumen { get;protected set; }
         public Color Color { get; protected set; }

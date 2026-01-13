@@ -9,13 +9,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
     public class Door
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        private bool isOpen { get; set; }
-        private string material { get; set; }
-        private string type { get; set; }
-        private bool isBulletProof { get; set; }
-        private bool isEnterHouseDoor { get; set; }
-        private bool isInsideHouseDoor { get; set; }
-        private double height, length, width;
+        public bool isOpen { get; set; }
+        public string material { get; set; }
+        public string type { get; set; }
+        public bool isBulletProof { get; set; }
+        public bool isEnterHouseDoor { get; set; }
+        public bool isInsideHouseDoor { get; set; }
+        public double height, length, width;
 
         public Door(bool IsOpen, string Material, string Type, bool IsBulletProof, bool IsEnterHouseDoor, bool IsInsideHouseDoor, double Height, double Length, double Width)
         {
