@@ -10,9 +10,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         private string type { get; set; }// a olio o ad aria
-        public bool isOn = false;
-        private string basketStatus;  // status basket può essere down o up
-        private double temperature { get; set; }
+        public string basketStatus;  // status basket può essere down o up
+        public double temperature { get; set; }
         public int numberOfFryerBeforeChangeOil { get; set; }
 
         private const double minTemp = 160.0; // temperature standard di una friggitrice vera prese da Google
@@ -25,8 +24,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 
         public Fryer(double startTemperature, int defaultNumberOfFryerBeforeChangeOil, string tipo)
         {
-            
-            isOn = false;
             basketStatus = "down";
             temperature = startTemperature; // temperatura di default
             numberOfFryerBeforeChangeOil = defaultNumberOfFryerBeforeChangeOil; // numero di fritture di default

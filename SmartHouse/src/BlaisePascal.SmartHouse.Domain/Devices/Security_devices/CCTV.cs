@@ -12,12 +12,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public bool isOn { get; protected set; }
-        private int ResolutionWidth { get; set; }
-        private int resolutionHeight { get; set; }
-        private int frameRate { get; set; }
-        private int storageCapacity { get; set; } // in GB
-        private bool nightVision_Property { get; set; }
-        private bool bulletProof { get; set; }
+        public int ResolutionWidth { get; set; }
+        public int resolutionHeight { get; set; }
+        public int frameRate { get; set; }
+        public int storageCapacity { get; set; } // in GB
+        public bool nightVision_Property { get; set; }
+        public bool bulletProof { get; set; }
         private const int max_storageCapacity = 500;
         private const int min_storageCapacity = 100;
         public bool status = false;
