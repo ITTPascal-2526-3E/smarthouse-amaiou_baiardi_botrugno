@@ -17,6 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 
         private const int minBrightenes = 0;
         private const int maxBrightenes = 100;
+        public bool status = false;
 
         //Costruttore di Lamp
         public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness)
@@ -29,7 +30,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.brightness = Initialbrightness;    
         }
         // accendi e spegni la lampada
-        public override void TurnOn()
+        public void TurnOn()
         {
             if (status == false)
             {
@@ -40,7 +41,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 throw new InvalidOperationException("Device is already on.");
             }
         }
-        public override void TurnOff()
+        public void TurnOff()
         {
             if (status == true)
             {

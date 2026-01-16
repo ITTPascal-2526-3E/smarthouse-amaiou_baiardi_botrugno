@@ -32,9 +32,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         }
 
         //usa il metodo per accendere/spegnere la lampada
-        public void turnOn_Off()
+        public void turnOn()
         {
-            lamp.turnOn_Off();
+            lamp.TurnOn();
+        }
+        public void turnOff()
+        {
+            lamp.TurnOff();
         }
 
         //usa il metodo per cambiare il colore della lampada
@@ -69,9 +73,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 
         //usa il metodo per accendere/spegnere la lampada eco
 
-        public void ecoLampTurnOn_Off()
+        public void ecoLampTurnOn()
         {
-            ecoLamp.turnOn_Off();
+            ecoLamp.TurnOn();
+        }
+        public void ecoLampTurnOff()
+        {
+            ecoLamp.TurnOff();
         }
 
         //usa il metodo per cambiare il colore della lampada eco

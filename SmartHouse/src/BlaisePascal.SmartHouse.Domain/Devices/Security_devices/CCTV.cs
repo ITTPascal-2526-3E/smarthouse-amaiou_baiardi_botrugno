@@ -20,6 +20,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         private bool bulletProof { get; set; }
         private const int max_storageCapacity = 500;
         private const int min_storageCapacity = 100;
+        public bool status = false;
 
 
 
@@ -35,7 +36,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             this.bulletProof = StartBulletProof;
 
         }
-        public override void TurnOn()
+        public void TurnOn()
         {
             if (status == false)
             {
@@ -46,7 +47,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
                 throw new InvalidOperationException("Device is already on.");
             }
         }
-        public override void TurnOff()
+        public void TurnOff()
         {
             if (status == true)
             {

@@ -17,6 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         public enum funSpeed { Low, Medium, High }
         public bool energySavingMode = false;
         private string name = " ";
+        public bool status = false;
 
 
         public AirConditioner(double initialTemp)
@@ -32,7 +33,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
             }
         }
 
-        public override void TurnOn()
+        public void TurnOn()
         {
             if (status == false)
             {
@@ -43,7 +44,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
                 throw new InvalidOperationException("Device is already on.");
             }
         }
-        public override void TurnOff()
+        public void TurnOff()
         {
             if (status == true)
             {

@@ -12,13 +12,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         private AirConditioner airConditioner = new AirConditioner(18.00);
         public void turnOnAirConditioner() 
         {
-            airConditioner.turnOn();
+            airConditioner.TurnOn();
            
         }
         public void turnOffAirConditioner()
         {
             
-            airConditioner.turnOff(30);
+            airConditioner.TurnOff();
         }
         public void changeAirConditionerMode()
         {

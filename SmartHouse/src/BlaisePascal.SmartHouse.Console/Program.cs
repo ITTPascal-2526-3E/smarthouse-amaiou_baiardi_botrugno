@@ -45,7 +45,8 @@ class Program
         twoLampDevice.setLampAttributes(lamp2);
         twoLampDevice.setLampType("led");
         twoLampDevice.setEnergyClass("B");
-        twoLampDevice.turnOn_Off();
+        twoLampDevice.turnOn();
+        twoLampDevice.turnOff();
         twoLampDevice.changeColor("green");
         twoLampDevice.setBrightness(50);
         Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.IsOn);
@@ -55,7 +56,8 @@ class Program
         twoLampDevice.setEcoLampAttributes(ecoLamp2);
         twoLampDevice.setEcoLampType("led");
         twoLampDevice.setEcoLampEnergyClass("Aaa");
-        twoLampDevice.ecoLampTurnOn_Off();
+        twoLampDevice.ecoLampTurnOn();
+        twoLampDevice.ecoLampTurnOff();
         twoLampDevice.ecoLampChangeColor("yellow");
         twoLampDevice.ecoLampSetBrightness(80);
         twoLampDevice.turnOffAfterDuration(90);

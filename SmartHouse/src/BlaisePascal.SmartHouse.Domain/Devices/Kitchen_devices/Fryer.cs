@@ -20,8 +20,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 
         private const int max_numberOfFryer_BeforeChangeOil = 10;
         private const int min_numberOfFryer_BeforeChangeOil = 3;
+        public bool status = false;
 
-        
+
         public Fryer(double startTemperature, int defaultNumberOfFryerBeforeChangeOil, string tipo)
         {
             
@@ -31,7 +32,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
             numberOfFryerBeforeChangeOil = defaultNumberOfFryerBeforeChangeOil; // numero di fritture di default
             type = tipo;
         }
-        public override void TurnOn()
+        public void TurnOn()
         {
             if (status == false)
             {
@@ -42,7 +43,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
                 throw new InvalidOperationException("Device is already on.");
             }
         }
-        public override void TurnOff()
+        public void TurnOff()
         {
             if (status == true)
             {

@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices
 {
-    public abstract class Device 
+    public interface Device 
     {
-       
-        public bool status { get; protected set; }
-      
-        public Device() 
-        { 
-            status = false;
-        }
         public abstract void TurnOn();
 
         public abstract void TurnOff();
