@@ -54,7 +54,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTests
             door.changeDoorState();
 
             // Assert
-            Assert.False(false);
+            Assert.False(door.isOpen);
         }
 
         [Fact]
