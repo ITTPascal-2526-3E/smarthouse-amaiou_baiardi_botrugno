@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public class TwoLampsDevice
+    public sealed class TwoLampsDevice
     {
-        private Lamp lamp = new Lamp(0.0, 0, 0, 6);
+        private Lamp lamp = new Lamp(0.0, 0, 0, 6,"vitto");
         private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6);
 
         //chiama il costruttore della classe Lamp e assegna l'istanza alla variabile lamp

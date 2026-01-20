@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Console
 {
-    internal class LampsRow
+    public sealed class LampsRow
     {
         private List<Lamp> lamps = new List<Lamp>();
 
@@ -82,11 +82,17 @@ namespace BlaisePascal.SmartHouse.Console
         {
             return lamps.OrderBy(l => l.brightness).FirstOrDefault();
         }
-        public List<Lamp> FindLampsByIntensityRange(int min, int max)
+       public void setLampType(Guid id, string lampTypeValue)
         {
-            return lamps
-                .Where(l => l.brightness >= min && l.brightness <= max)
-                .ToList();
+            lamps.FirstOrDefault(l => l.Id == id)?.setLampType(lampTypeValue);
+        }
+        public void setEnergyClass(Guid id, string energyClassValue)
+        {
+            lamps.FirstOrDefault(l => l.Id == id)?.setEnergyClass(energyClassValue);
+        }
+        public void changeColor(Guid id, string colorValue)
+        {
+            lamps.FirstOrDefault(l => l.Id == id)?.changeColor(colorValue);
         }
     }
 }

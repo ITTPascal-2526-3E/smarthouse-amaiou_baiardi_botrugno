@@ -5,6 +5,7 @@ using BlaisePascal.SmartHouse.Domain.Devices.Temp_devices;
 using System.Reflection;
 using Color = BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Color;
 using System;
+using BlaisePascal.SmartHouse.Console;
 namespace BlaisePascal.SmartHouse.Domain { }
 
 class Program
@@ -149,6 +150,47 @@ class Program
             fryer.change_NumberOfFryer_BeforeChangeOil(5);
             Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
             Console.WriteLine("ID Friggitrice: " + fryer.Id);
+
+            
+           LampsRow lampsRow = new LampsRow();
+           lampsRow.AddLamp(new Lamp(30.0, 500, 5000, 60, "led"));
+           lampsRow.AddLamp(new EcoLamp(20.0, 400, 5000, 60));
+           Lamp newLamp = new Lamp(35.0, 800, 5000, 60, "pir");
+           lampsRow.SwitchOn();
+           Console.WriteLine("Tutte le lampade sono accese: ");
+           lampsRow.SwitchOn(newLamp.Id); // Non esiste, solo per dimostrazione
+           lampsRow.SwitchOn("hhh");
+           Console.WriteLine("la lampada con name hhh è accesa: ");
+           lampsRow.SwitchOff();
+           Console.WriteLine("Tutte le lampade sono spente: ");
+           lampsRow.SwitchOff(newLamp.Id);
+           Console.WriteLine("La lampada con guid: Guid è stata spenta ");
+           lampsRow.SwitchOff("hhh");
+           Console.WriteLine("la lampada con name hhh è spenta: ");
+           lampsRow.AddLampInPosition(newLamp, 1);
+           Console.WriteLine("Lampada aggiunta in posizione 1: ");
+           lampsRow.RemoveLamp(newLamp.Id);                              
+           Console.WriteLine("Lampada rimossa con guid specificato: ");
+           lampsRow.RemoveLamp("zzz");
+           Console.WriteLine("Lampada rimossa con name specificato: ");
+           lampsRow.RemoveLampInPosition(0);
+           Console.WriteLine("Lampada rimossa in posizione 0: ");
+           lampsRow.SetIntensityForAllLamps(35);
+           Console.WriteLine("Intensità impostata a 35 per tutte le lampade: ");
+           lampsRow.SetIntensityForLamp(newLamp.Id, 50);
+           Console.WriteLine("Intensità impostata a 50 per la lampada con guid specificato: ");
+           lampsRow.SetIntensityForLamp("hhh", 75);
+           Console.WriteLine("Intensità impostata a 75 per la lampada con name specificato: ");
+           lampsRow.FindLampWithMaxIntensity();
+           Console.WriteLine("Lampada con intensità massima trovata: ");
+           lampsRow.FindLampWithMinIntensity();
+           Console.WriteLine("Lampada con intensità minima trovata: ");
+           lampsRow.setEnergyClass(newLamp.Id, "A");
+           Console.WriteLine("Classe energetica impostata per la lampada con guid specificato: ");
+           lampsRow.setLampType(newLamp.Id, "led");
+           Console.WriteLine("Tipo di lampada impostato per la lampada con guid specificato: ");
+           lampsRow.changeColor(newLamp.Id, "white");
+           Console.WriteLine("Colore cambiato per la lampada con guid specificato: ");
 
     }
 }

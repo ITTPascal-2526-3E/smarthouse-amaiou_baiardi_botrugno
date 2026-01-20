@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public class EcoLamp : Lamp
+    public sealed class EcoLamp : Lamp
     {
         //Creazione variabili/attributi
         public int DurationBeforeOff { get; private set; }
         //Costruttore di EcoLamp
-        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes, int InitialBrightness) : base(lampHeat, lumen, durationBeforeItFlashes, InitialBrightness)
+        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes, int InitialBrightness, string name) 
+            : base(lampHeat, lumen, durationBeforeItFlashes, InitialBrightness, name)
         {
             Id = Guid.NewGuid();
             IsOn = false;

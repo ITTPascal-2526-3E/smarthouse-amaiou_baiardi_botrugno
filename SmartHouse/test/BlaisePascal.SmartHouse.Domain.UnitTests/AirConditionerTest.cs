@@ -34,7 +34,7 @@ namespace BlaisePascal.SmartHouse.Tests
         public void IncreaseTemp_WhenOn_IncreasesTemperature()
         {
             AirConditioner ac = new AirConditioner(20);
-            ac.isOn = true;
+            ac.status = true;
 
             ac.increaseTemp();
 
@@ -56,7 +56,7 @@ namespace BlaisePascal.SmartHouse.Tests
         public void DecreaseTemp_WhenOn_DecreasesTemperature()
         {
             AirConditioner ac = new AirConditioner(20);
-            ac.isOn = true;
+            ac.status = true;
 
             ac.decreaseTemp();
 

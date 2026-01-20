@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
 {
-    public class Fryer : Device
+    public sealed class Fryer : Device
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         private string type { get; set; }// a olio o ad aria

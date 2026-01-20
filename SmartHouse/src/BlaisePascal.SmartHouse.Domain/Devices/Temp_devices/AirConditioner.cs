@@ -8,7 +8,7 @@ using static BlaisePascal.SmartHouse.Domain.Devices.Temp_devices.AirConditioner;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 {
-    public class AirConditioner : Device
+    public sealed class AirConditioner : Device
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public double temp { get; set; }

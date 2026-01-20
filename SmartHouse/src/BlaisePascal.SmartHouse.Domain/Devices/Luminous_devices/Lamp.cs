@@ -7,7 +7,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         //Creazione variabili/attributi
         public Guid Id { get; protected set; }
         public string Name { get; protected set; }
-        public bool IsOn { get; protected set; }
         public LampType LampType { get; protected set; }
         public double LampHeat { get; protected set; }
         public EnergyClass EnergyClass { get; protected set; }
@@ -24,7 +23,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness,string name)
         {
             Id = Guid.NewGuid();
-            IsOn = false;
+            status = false;
             this.LampHeat = lampHeat;
             this.Lumen = lumen;
             this.DurationBeforeItFlashes = durationBeforeItFlashes;

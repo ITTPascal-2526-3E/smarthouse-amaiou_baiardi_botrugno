@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
 {
-    public class Thermostat 
+    public sealed class Thermostat 
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         private AirConditioner airConditioner = new AirConditioner(18.00);
