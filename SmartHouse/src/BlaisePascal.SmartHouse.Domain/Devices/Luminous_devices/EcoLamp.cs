@@ -15,7 +15,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             : base(lampHeat, lumen, durationBeforeItFlashes, InitialBrightness, name)
         {
             Id = Guid.NewGuid();
-            IsOn = false;
             this.Lumen = lumen;
             this.LampHeat = lampHeat;
             this.DurationBeforeItFlashes = durationBeforeItFlashes;

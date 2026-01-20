@@ -5,59 +5,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTests
 {
     public class DoorTest
     {
-        [Fact]
-        public void changeHeight_ShouldchangeHeight_AndValueIsInRange()
-        {
-            // Arrange
-            var door = new Door(false,"legno","scorrevole", true, true, false, 3.5, 3.0, 4.0);
-
-            // Act
-            door.changeHeight(3.3);
-
-            // Assert
-            Assert.Equal(3.3, door.height);
-        }
-
-        [Fact]
-        public void changeHeight_ShouldChangeHeight_AndValueIsNotInRange()
-        {
-            // Arrange
-            var door = new Door(false,"legno","scorrevole", true, true, false, 3.5, 3.0, 4.0);
-
-            // Act
-            door.changeHeight(0.0);
-
-            // Assert
-            Assert.Throws<Exception>(() => door.height);
-
-        }
-
-        [Fact]
-        public void changeWidth_ShouldchangeWidth_AndValueIsInRange()
-        {
-            // Arrange
-            var door = new Door(false, "legno", "scorrevole", true, true, false, 3.5, 3.0, 4.0);
-
-            // Act
-            door.changeWidth(3.3);
-
-            // Assert
-            Assert.Equal(3.3, door.width);
-        }
-
-        [Fact]
-        public void changeWidth_ShouldChangeWidth_AndValueIsNotInRange()
-        {
-            // Arrange
-            var door = new Door(false, "legno", "scorrevole", true, true, false, 3.5, 3.0, 4.0);
-
-            // Act
-            door.changeWidth(0.0);
-
-            // Assert
-            Assert.Throws<Exception>(() => door.width);
-
-        }
+        
         [Fact]
         public void changeLength_ShouldchangeLength_AndValueIsInRange()
         {

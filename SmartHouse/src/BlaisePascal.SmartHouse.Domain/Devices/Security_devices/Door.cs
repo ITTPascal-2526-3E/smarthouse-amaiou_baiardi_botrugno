@@ -17,6 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         public bool isInsideHouseDoor { get; set; }
         public double height, length, width;
 
+        // aggiungere funzioni in modo da poter cambiare lo stato della porta (aperta/chiusa), la lunghezza, se è antiproiettile, se è porta d'ingresso o porta interna ecc 
         public Door(bool IsOpen, string Material, string Type, bool IsBulletProof, bool IsEnterHouseDoor, bool IsInsideHouseDoor, double Height, double Length, double Width)
         {
             Id = Guid.NewGuid();
@@ -52,25 +53,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
                 length = value;
         }
 
-        public void changeWidth(double value)
-        {
-            if (value <= 0.0)
-            {
-                throw new ArgumentOutOfRangeException("Width cannot be negative.");
-            }
-            else
-                width = value;
-        }
-
-        public void changeHeight(double value)
-        {
-            if (value <= 0.0)
-            {
-                throw new ArgumentOutOfRangeException("Height cannot be negative.");
-            }
-            else
-                height = value;
-        }
 
         public void change_BulletProof()
         {

@@ -17,7 +17,7 @@ class Program
             lamp.setLampType("led");
             lamp.setEnergyClass("A");
             lamp.TurnOn();
-            Console.WriteLine(lamp.IsOn);
+            Console.WriteLine(lamp.status);
             lamp.changeColor("red");
             Console.WriteLine(lamp.Color);
             lamp.setBrightness(70); // Updated to match the correct property name
@@ -27,13 +27,13 @@ class Program
 
 
 
-            EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000, 60);
+            EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000, 60,"vitto");
             ecoLamp.setLampType("led");
             ecoLamp.setEnergyClass("Aaa");
             ecoLamp.changeColor("blue");
             ecoLamp.TurnOn();
             ecoLamp.turnOffAfterDuration(120);
-            Console.WriteLine(ecoLamp.IsOn);
+            Console.WriteLine(ecoLamp.status);
             Console.WriteLine(ecoLamp.Color);
             Console.WriteLine(ecoLamp.Id);
             Console.WriteLine(ecoLamp.EnergyClass);
@@ -51,10 +51,10 @@ class Program
             twoLampDevice.turnOff();
             twoLampDevice.changeColor("green");
             twoLampDevice.setBrightness(50);
-            Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.IsOn);
+            Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.status);
             Console.WriteLine("Lampada 1 - Colore: " + lamp2.Color);
             Console.WriteLine("Lampada 1 - Luminosità: " + lamp2.brightness);
-            EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000, 60);
+            EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000, 60, "vitto");
             twoLampDevice.setEcoLampAttributes(ecoLamp2);
             twoLampDevice.setEcoLampType("led");
             twoLampDevice.setEcoLampEnergyClass("Aaa");
@@ -63,7 +63,7 @@ class Program
             twoLampDevice.ecoLampChangeColor("yellow");
             twoLampDevice.ecoLampSetBrightness(80);
             twoLampDevice.turnOffAfterDuration(90);
-            Console.WriteLine("Lampada 2 - Stato acceso: " + ecoLamp2.IsOn);
+            Console.WriteLine("Lampada 2 - Stato acceso: " + ecoLamp2.status);
             Console.WriteLine("Lampada 2 - Colore: " + ecoLamp2.Color);
             Console.WriteLine("Lampada 2 - Luminosità: " + ecoLamp2.brightness);
             Console.WriteLine(ecoLamp2.DurationBeforeOff);
@@ -111,10 +111,6 @@ class Program
             Console.WriteLine("Stato porta cambiato: ");
             door.changeLength(6.00);
             Console.WriteLine("Lunghezza porta cambiata: ");
-            door.changeHeight(2.50);
-            Console.WriteLine("Altezza porta cambiata: ");
-            door.changeWidth(0.90);
-            Console.WriteLine("Larghezza porta cambiata: ");
             door.change_BulletProof();
             Console.WriteLine("Porta antiproiettile cambiata: ");
             door.change_EnterHouseDoor();
@@ -154,7 +150,7 @@ class Program
             
            LampsRow lampsRow = new LampsRow();
            lampsRow.AddLamp(new Lamp(30.0, 500, 5000, 60, "led"));
-           lampsRow.AddLamp(new EcoLamp(20.0, 400, 5000, 60));
+           lampsRow.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
            Lamp newLamp = new Lamp(35.0, 800, 5000, 60, "pir");
            lampsRow.SwitchOn();
            Console.WriteLine("Tutte le lampade sono accese: ");

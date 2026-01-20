@@ -2,7 +2,7 @@
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public class Lamp : Device
+    public class Lamp : Iswitchable, IsetLuminousDeviceSettings
     {
         //Creazione variabili/attributi
         public Guid Id { get; protected set; }

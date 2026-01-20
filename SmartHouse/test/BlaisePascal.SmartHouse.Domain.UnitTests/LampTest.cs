@@ -11,9 +11,9 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void Constructor_InitializesLampCorrectly()
         {
-            Lamp lamp = new Lamp(40.5, 800, 10, 50);
+            Lamp lamp = new Lamp(40.5, 800, 10, 50, "vitto");
 
-            Assert.False(lamp.IsOn);
+            Assert.False(lamp.status);
             Assert.Equal(40.5, lamp.LampHeat);
             Assert.Equal(800, lamp.Lumen);
             Assert.Equal(10, lamp.DurationBeforeItFlashes);
@@ -26,7 +26,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetLampType_WithInvalidType_ThrowsException()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30,"vitto");
 
             Assert.Throws<ArgumentException>(() =>
             {
@@ -39,7 +39,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetEnergyClass_WithValidClass_SetsEnergyClass()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
 
             lamp.setEnergyClass("A");
 
@@ -49,7 +49,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetEnergyClass_WithInvalidClass_ThrowsException()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
 
             Assert.Throws<ArgumentException>(() =>
             {
@@ -62,7 +62,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void ChangeColor_WhenLampIsLed_ChangesColor()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
             lamp.setLampType("led");
 
             lamp.changeColor("Red");
@@ -73,7 +73,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void ChangeColor_WhenLampIsNotLed_ThrowsException()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
             lamp.setLampType("halogen");
 
             Assert.Throws<InvalidOperationException>(() =>
@@ -86,7 +86,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetBrightness_WithValidValue_SetsBrightness()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
 
             lamp.setBrightness(80);
 
@@ -96,7 +96,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetBrightness_TooLow_ThrowsException()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -107,7 +107,7 @@ namespace BlaisePascal.SmartHouse.Tests
         [Fact]
         public void SetBrightness_TooHigh_ThrowsException()
         {
-            Lamp lamp = new Lamp(40, 600, 5, 30);
+            Lamp lamp = new Lamp(40, 600, 5, 30, "vitto");
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {

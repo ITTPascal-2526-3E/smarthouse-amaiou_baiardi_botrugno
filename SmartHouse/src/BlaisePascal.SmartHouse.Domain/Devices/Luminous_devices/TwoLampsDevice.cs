@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
-    public sealed class TwoLampsDevice
+    public sealed class TwoLampsDevice : IsetLuminousDeviceSettings
     {
         private Lamp lamp = new Lamp(0.0, 0, 0, 6,"vitto");
-        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6);
+        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6, "vitto");
 
         //chiama il costruttore della classe Lamp e assegna l'istanza alla variabile lamp
         public void setLampAttributes(Lamp lamp)
@@ -20,9 +20,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         }
 
         //usa il metodo per ottenere il tipo di lampada
-        public void setLampType(string lampTypeValue)
+        public LampType setLampType(string lampTypeValue)
         {
-            lamp.setLampType(lampTypeValue);
+            return lamp.setLampType(lampTypeValue); // da modificare in lamp questa è una roba di prova
         }
 
         //usa il metodo per ottenere la classe energetica

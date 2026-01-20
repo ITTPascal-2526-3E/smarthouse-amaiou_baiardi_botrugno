@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices
 {
-    public interface Device 
+    public interface Iswitchable
     {
-        public abstract void TurnOn();
+        public void TurnOn();
 
-        public abstract void TurnOff();
+        public void TurnOff();
     }
 }
