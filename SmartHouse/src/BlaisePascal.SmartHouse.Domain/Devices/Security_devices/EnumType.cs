@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
-    public interface Icctv
+    public enum EnumType
     {
-
+        bulletProof,armoredDoor,fireProof,alarmedDoor
     }
 }
