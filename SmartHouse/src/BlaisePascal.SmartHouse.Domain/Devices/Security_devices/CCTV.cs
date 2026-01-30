@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
-    public sealed class CCTV : Iswitchable
+    public sealed class CCTV : Iswitchable, Isecurity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
