@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
-    public sealed class Door : Isecurity
+    public sealed class Door : Alarm, ISecurity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public bool isOpen { get; set; }
@@ -17,6 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         public bool isEnterHouseDoor { get; set; }
         public bool isInsideHouseDoor { get; set; }
         public double height, length, width;
+        public bool LockStatus { get; set; }
 
         // aggiungere funzioni in modo da poter cambiare lo stato della porta (aperta/chiusa), la lunghezza, se è antiproiettile, se è porta d'ingresso o porta interna ecc 
         public Door(bool IsOpen, string Material, bool IsEnterHouseDoor, bool IsInsideHouseDoor, double Height, double Length, double Width)
@@ -81,6 +82,16 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             this.type = Enum.Parse<EnumType>(type);
 
         }
-
+        public void DoorIsLockAndOpen()
+        {
+            if (isOpen == true & LockStatus == true)
+            {
+                suona = true;
+            }
+            else
+            {
+                throw new ArgumentException("Non Succede Nulla");
+            }
+        }
     }
 }

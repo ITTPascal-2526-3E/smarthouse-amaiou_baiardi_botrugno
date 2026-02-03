@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
-    public interface Isecurity
+    public interface ISecurity
     {
+        Guid Id { get; }
+        bool IsArmed { get; }
 
+        void Arm();
+        void Disarm();
     }
 }
