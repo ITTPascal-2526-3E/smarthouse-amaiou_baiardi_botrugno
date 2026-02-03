@@ -30,6 +30,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             this.length = Length;
             this.width = Width;
         }
+
+
         public void changeDoorState()
         {
             if (!(isOpen == true))
@@ -40,16 +42,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
             {
                 isOpen = true;
             }
-        }
-
-        public void changeLength(double value)
-        {
-            if (value <= 0.0)
-            {
-                throw new ArgumentOutOfRangeException("Length cannot be negative.");
-            }
-            else
-                length = value;
         }
 
         public void change_EnterHouseDoor()
