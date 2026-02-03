@@ -12,7 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public EnergyClass EnergyClass { get; protected set; }
         public int brightness { get; set; }
         public int Lumen { get;protected set; }
-        public Color Color { get; protected set; }
+        public Color color { get; protected set; }
         public int DurationBeforeItFlashes { get; protected set; }
 
         private const int minBrightenes = 0;
@@ -81,7 +81,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         { 
             if (LampType == LampType.led)
             {
-                this.Color = Enum.Parse<Color>(color);
+                this.color = Enum.Parse<Color>(color);
             }
             else
             {

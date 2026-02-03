@@ -67,7 +67,7 @@ namespace BlaisePascal.SmartHouse.Tests
 
             lamp.changeColor("Red");
 
-            Assert.Equal(Color.red, lamp.Color);
+            Assert.Equal(Color.red, lamp.color);
         }
 
         [Fact]
