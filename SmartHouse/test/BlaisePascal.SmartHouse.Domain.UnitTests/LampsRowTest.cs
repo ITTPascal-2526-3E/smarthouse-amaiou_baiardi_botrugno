@@ -81,7 +81,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTests
             row.AddLamp(lamp1);
             row.changeColor(lamp1.Id, "pink");
 
-            Assert.Equal(lamp1.Color, "pink");
+            Assert.Equal(lamp1.color, Color.pink);
         }
 
         public void changeColor_ShouldSetColor_AndColorValueIsNotCorrect()
@@ -94,5 +94,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTests
 
             Assert.Throws<Exception>(() => row.changeColor(lamp1.Id,""));
         }
+
+
     }
 }
