@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
+namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices.Repositories
 {
     public class Alarm : SecurityDevice
     {
