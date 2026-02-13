@@ -26,7 +26,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         }
         public void changeAirConditionerFunSpeed()
         {
-            airConditioner.changefunspeed();
+            if (!airConditioner.status)
+            {
+                airConditioner.TurnOn();
+            }
+            airConditioner.changefunspeed();    
         }
         public void increaseAirConditionerTemp()
         {

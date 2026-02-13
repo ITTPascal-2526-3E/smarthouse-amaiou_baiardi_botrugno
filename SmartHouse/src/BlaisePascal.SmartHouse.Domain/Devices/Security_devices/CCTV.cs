@@ -19,5 +19,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 
             NightVision = !NightVision;
         }
+        public override void Arm()
+        {
+            if (!IsOn)
+            {
+                TurnOn();
+            }
+            base.Arm();
+        }
     }
 }
