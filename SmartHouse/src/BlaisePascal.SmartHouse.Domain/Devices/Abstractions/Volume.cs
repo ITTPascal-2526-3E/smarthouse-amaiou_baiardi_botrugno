@@ -17,7 +17,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             {
                 throw new ArgumentOutOfRangeException();
             }
-            else if () { }
+            else{ value = volume; }
 
         }
     }
