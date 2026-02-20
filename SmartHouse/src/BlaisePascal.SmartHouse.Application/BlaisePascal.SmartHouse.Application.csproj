@@ -10,4 +10,8 @@
     <Folder Include="Devices\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Domain\BlaisePascal.SmartHouse.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
