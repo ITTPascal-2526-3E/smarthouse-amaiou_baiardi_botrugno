@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application
 {
-    internal class GetLampByIdQuery
+    internal class GetDoorByIdQuery
     {
         private readonly ILampRepository _repository;
-        
-        public GetLampByIdQuery(ILampRepository repository)
+
+        public GetDoorByIdQuery(ILampRepository repository)
         {
             _repository = repository;
         }
 
-        public Lamp Execute(Guid id) 
+        public Lamp Execute(Guid id)
         {
-
+            return _repository.GetById(id);
         }
     }
 }

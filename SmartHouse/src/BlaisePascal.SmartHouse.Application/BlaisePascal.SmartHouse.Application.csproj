@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Devices\" />
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlaisePascal.SmartHouse.Domain\BlaisePascal.SmartHouse.Domain.csproj" />
+    <Folder Include="Devices\DispositivoCCTV\CCTV\Dto\" />
+    <Folder Include="Devices\DispositivoCCTV\CCTV\Mappers\" />
+    <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Dto\" />
+    <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Mappers\" />
+    <Folder Include="Devices\InfissoDoor\Door\Dto\" />
+    <Folder Include="Devices\InfissoDoor\Door\Mappers\" />
+    <Folder Include="Devices\Lightning\Lamps\Dto\" />
+    <Folder Include="Devices\Lightning\Lamps\Mappers\" />
   </ItemGroup>
 
 </Project>
