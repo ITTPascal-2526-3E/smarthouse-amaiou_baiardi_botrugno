@@ -8,179 +8,132 @@ using System;
 using BlaisePascal.SmartHouse;
 namespace BlaisePascal.SmartHouse.Domain { }
 
+
 class Program
 {
     static void Main(string[] args)
     {
+        // Inizializzazione del sistema completo
+        LampsRow salottoLamps = new LampsRow();
+        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, "pir"));
+        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
 
+        AirConditioner ac = new AirConditioner(22.0);
+        CCTV telecamera = new CCTV();
+        Door portaIngresso = new Door(false, "acciaio", true, false, 10.0, 5.0, 4.0);
 
-        Guid id = Guid.NewGuid();
-        Lamp lamp = new Lamp(35.0, 800, 5000, 60, "pir");
-        lamp.setLampType("led");
-        lamp.setEnergyClass("A");
-        lamp.TurnOn();
-        Console.WriteLine(lamp.status);
-        lamp.changeColor("red");
-        Console.WriteLine(lamp.color);
-        lamp.setBrightness(70); // Updated to match the correct property name
-        Console.WriteLine(lamp.brightness);
-        lamp.TurnOff();
+        bool continua = true;
 
+        while (continua)
+        {
+            Console.Clear(); // Pulisce la console per un menu più ordinato
+            Console.WriteLine("=== SMART HOME CONTROL PANEL ===");
+            Console.WriteLine("1.  Gestisci Gruppo Luci (LampsRow)");
+            Console.WriteLine("2.  Gestisci Condizionatore");
+            Console.WriteLine("3.  Gestisci Sicurezza (CCTV & Porta)");
+            Console.WriteLine("0.  Esci dal sistema");
+            Console.Write("\nSeleziona un'opzione: ");
 
+            string scelta = Console.ReadLine();
 
+            switch (scelta)
+            {
+                case "1":
+                    MenuLampsRow(salottoLamps);
+                    break;
+                case "2":
+                    MenuAC(ac);
+                    break;
+                case "3":
+                    MenuSicurezza(telecamera, portaIngresso);
+                    break;
+                case "0":
+                    continua = false;
+                    Console.WriteLine("Chiusura del pannello di controllo...");
+                    break;
+                default:
+                    Console.WriteLine("Scelta non valida. Premi un tasto per riprovare.");
+                    Console.ReadKey();
+                    break;
+            }
+        }
+    }
 
-        EcoLamp ecoLamp = new EcoLamp(25.0, 600, 5000, 60, "vitto");
-        ecoLamp.setLampType("led");
-        ecoLamp.setEnergyClass("Aaa");
-        ecoLamp.changeColor("blue");
-        ecoLamp.TurnOn();
-        ecoLamp.turnOffAfterDuration(120);
-        Console.WriteLine(ecoLamp.status);
-        Console.WriteLine(ecoLamp.color);
-        Console.WriteLine(ecoLamp.Id);
-        Console.WriteLine(ecoLamp.EnergyClass);
-        Console.WriteLine(ecoLamp.LampType);
-        ecoLamp.TurnOff();
+    // --- SOTTOMENU LAMPSROW (Gruppo di luci) ---
+    static void MenuLampsRow(LampsRow row)
+    {
+        Console.WriteLine("\n[MENU GRUPPO LUCI SALOTTO]");
+        Console.WriteLine("a. Accendi tutte le luci");
+        Console.WriteLine("b. Spegni tutte le luci");
+        Console.WriteLine("c. Imposta intensità per tutte (0-100)");
 
+        char op = Console.ReadKey(true).KeyChar;
+        switch (op)
+        {
+            case 'a':
+                row.SwitchOn();
+                Console.WriteLine("Tutte le luci sono state ACCESE.");
+                break;
+            case 'b':
+                row.SwitchOff();
+                Console.WriteLine("Tutte le luci sono state SPENTE.");
+                break;
+            case 'c':
+                Console.Write("\nInserisci intensità (0-100): ");
+                if (int.TryParse(Console.ReadLine(), out int lum))
+                {
+                    row.SetIntensityForAllLamps(lum);
+                    Console.WriteLine($"Intensità impostata a {lum} per tutte le lampade.");
+                }
+                break;
+        }
+        Console.WriteLine("Premi un tasto per tornare al menu principale...");
+        Console.ReadKey();
+    }
 
+    // --- SOTTOMENU CONDIZIONATORE ---
+    static void MenuAC(AirConditioner ac)
+    {
+        Console.WriteLine("\n[MENU CONDIZIONATORE]");
+        Console.WriteLine("+. Aumenta Temperatura");
+        Console.WriteLine("-. Diminuisci Temperatura");
 
-        TwoLampsDevice twoLampDevice = new TwoLampsDevice();
-        Lamp lamp2 = new Lamp(35.0, 200, 5000, 60, "pira");
-        twoLampDevice.setLampAttributes(lamp2);
-        twoLampDevice.setLampType("led");
-        twoLampDevice.setEnergyClass("B");
-        twoLampDevice.turnOn();
-        twoLampDevice.turnOff();
-        twoLampDevice.changeColor("green");
-        twoLampDevice.setBrightness(50);
-        Console.WriteLine("Lampada 1 - Stato acceso: " + lamp2.status);
-        Console.WriteLine("Lampada 1 - Colore: " + lamp2.color);
-        Console.WriteLine("Lampada 1 - Luminosità: " + lamp2.brightness);
-        EcoLamp ecoLamp2 = new EcoLamp(20.0, 400, 5000, 60, "vitto");
-        twoLampDevice.setEcoLampAttributes(ecoLamp2);
-        twoLampDevice.setEcoLampType("led");
-        twoLampDevice.setEcoLampEnergyClass("Aaa");
-        twoLampDevice.ecoLampTurnOn();
-        twoLampDevice.ecoLampTurnOff();
-        twoLampDevice.ecoLampChangeColor("yellow");
-        twoLampDevice.ecoLampSetBrightness(80);
-        twoLampDevice.turnOffAfterDuration(90);
-        Console.WriteLine("Lampada 2 - Stato acceso: " + ecoLamp2.status);
-        Console.WriteLine("Lampada 2 - Colore: " + ecoLamp2.color);
-        Console.WriteLine("Lampada 2 - Luminosità: " + ecoLamp2.brightness);
-        Console.WriteLine(ecoLamp2.DurationBeforeOff);
+        char op = Console.ReadKey(true).KeyChar;
+        switch (op)
+        {
+            case '+':
+                ac.increaseTemp();
+                Console.WriteLine($"Temperatura attuale: {ac.temp}°C");
+                break;
+            case '-':
+                ac.decreaseTemp();
+                Console.WriteLine($"Temperatura attuale: {ac.temp}°C");
+                break;
+        }
+        Console.WriteLine("Premi un tasto per tornare al menu principale...");
+        Console.ReadKey();
+    }
 
+    // --- SOTTOMENU SICUREZZA ---
+    static void MenuSicurezza(CCTV cctv, Door porta)
+    {
+        Console.WriteLine("\n[MENU SICUREZZA]");
+        Console.WriteLine("1. Arma/Disarma Telecamere");
+        Console.WriteLine("2. Apri/Chiudi Porta d'ingresso");
 
-
-
-
-
-        AirConditioner airConditioner = new AirConditioner(18.00);
-        airConditioner.setName("Samsung WindFree");
-        airConditioner.TurnOn();
-        Console.WriteLine("AC acceso: " + airConditioner.status);
-        airConditioner.temp = 20.0;
-        Console.WriteLine("Temperatura iniziale: " + airConditioner.temp);
-        airConditioner.increaseTemp();
-        Console.WriteLine(airConditioner.temp);
-        airConditioner.decreaseTemp();
-        Console.WriteLine("Temperatura dopo aumento: " + airConditioner.temp);
-        airConditioner.PutInEnergySavingMode();
-        Console.WriteLine(airConditioner.energySavingMode);
-        airConditioner.changefunspeed();
-        Console.WriteLine("Velocità ventola cambiata.");
-
-
-
-        Thermostat thermostat = new Thermostat();
-        thermostat.turnOnAirConditioner();
-        Console.WriteLine("AC acceso tramite termostato.");
-        thermostat.turnOffAirConditioner();
-        Console.WriteLine("AC spento tramite termostato.");
-        thermostat.changeAirConditionerMode();
-        Console.WriteLine("Modalità risparmio energetico attivata tramite termostato.");
-        thermostat.changeAirConditionerFunSpeed();
-        Console.WriteLine("Velocità ventola cambiata tramite termostato.");
-        thermostat.increaseAirConditionerTemp();
-        Console.WriteLine("Temperatura aumentata tramite termostato.");
-        thermostat.decreaseAirConditionerTemp();
-        Console.WriteLine("Temperatura diminuita tramite termostato.");
-        thermostat.setName("Airconditioner");
-        Console.WriteLine(thermostat.Id);
-
-        Door door = new Door(true, "acciaio", true, false, 10.0, 5.0, 4.0);
-        door.changeDoorState();
-        Console.WriteLine("Stato porta cambiato: ");
-        Console.WriteLine("Porta antiproiettile cambiata: ");
-        door.change_EnterHouseDoor();
-        Console.WriteLine("Porta d'ingresso cambiata: ");
-        door.change_InsideHouseDoor();
-        Console.WriteLine("Porta interna cambiata: ");
-
-
-        CCTV cctv = new CCTV();
-        cctv.TurnOn();
-        Console.WriteLine("CCTV è accesa " + cctv.IsOn);
-        cctv.TurnOff();
-        Console.WriteLine("CCTV è spenta " + cctv.IsOn);
-        cctv.Arm();
-        Console.WriteLine("CCTV è armata" + cctv.IsArmed);
-        cctv.Disarm();
-        Console.WriteLine("CCTV è disarmata" + cctv.IsArmed);
-
-
-        Fryer fryer = new Fryer(180.00, 7, "olio");
-        fryer.TurnOn();
-        Console.WriteLine("Stato friggitrice cambiato " + fryer.status);
-        fryer.changeBasketStatus();
-        Console.WriteLine("Stato cestello friggitrice cambiato: ");
-        fryer.changeTemp(180.0);
-        Console.WriteLine("Temperatura friggitrice cambiata: ");
-        fryer.change_NumberOfFryer_BeforeChangeOil(5);
-        Console.WriteLine("Numero di fritture prima di cambiare l'olio cambiato: ");
-        Console.WriteLine("ID Friggitrice: " + fryer.Id);
-
-
-        LampsRow lampsRow = new LampsRow();
-        lampsRow.AddLamp(new Lamp(30.0, 500, 5000, 60, "led"));
-        lampsRow.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
-        Lamp newLamp = new Lamp(35.0, 800, 5000, 60, "pir");
-        lampsRow.SwitchOn();
-        Console.WriteLine("Tutte le lampade sono accese: ");
-        lampsRow.SwitchOn(newLamp.Id); // Non esiste, solo per dimostrazione
-        lampsRow.SwitchOn("hhh");
-        Console.WriteLine("la lampada con name hhh è accesa: ");
-        lampsRow.SwitchOff();
-        Console.WriteLine("Tutte le lampade sono spente: ");
-        lampsRow.SwitchOff(newLamp.Id);
-        Console.WriteLine("La lampada con guid: Guid è stata spenta ");
-        lampsRow.SwitchOff("hhh");
-        Console.WriteLine("la lampada con name hhh è spenta: ");
-        lampsRow.AddLampInPosition(newLamp, 1);
-        Console.WriteLine("Lampada aggiunta in posizione 1: ");
-        lampsRow.RemoveLamp(newLamp.Id);
-        Console.WriteLine("Lampada rimossa con guid specificato: ");
-        lampsRow.RemoveLamp("zzz");
-        Console.WriteLine("Lampada rimossa con name specificato: ");
-        lampsRow.RemoveLampInPosition(0);
-        Console.WriteLine("Lampada rimossa in posizione 0: ");
-        lampsRow.SetIntensityForAllLamps(35);
-        Console.WriteLine("Intensità impostata a 35 per tutte le lampade: ");
-        lampsRow.SetIntensityForLamp(newLamp.Id, 50);
-        Console.WriteLine("Intensità impostata a 50 per la lampada con guid specificato: ");
-        lampsRow.SetIntensityForLamp("hhh", 75);
-        Console.WriteLine("Intensità impostata a 75 per la lampada con name specificato: ");
-        lampsRow.FindLampWithMaxIntensity();
-        Console.WriteLine("Lampada con intensità massima trovata: ");
-        lampsRow.FindLampWithMinIntensity();
-        Console.WriteLine("Lampada con intensità minima trovata: ");
-        lampsRow.setEnergyClass(newLamp.Id, "A");
-        Console.WriteLine("Classe energetica impostata per la lampada con guid specificato: ");
-        lampsRow.setLampType(newLamp.Id, "led");
-        Console.WriteLine("Tipo di lampada impostato per la lampada con guid specificato: ");
-        lampsRow.changeColor(newLamp.Id, "white");
-        Console.WriteLine("Colore cambiato per la lampada con guid specificato: ");
-
-         //commento per fare un push dio 
+        char op = Console.ReadKey(true).KeyChar;
+        switch (op)
+        {
+            case '1':
+                if (cctv.IsArmed) cctv.Disarm(); else cctv.Arm();
+                Console.WriteLine($"Stato CCTV: {(cctv.IsArmed ? "ARMATA" : "DISARMATA")}");
+                break;
+            case '2':
+                porta.changeDoorState();
+                Console.WriteLine("Stato della porta cambiato.");
+                break;
+        }
+        Console.WriteLine("Premi un tasto per tornare al menu principale...");
+        Console.ReadKey();
     }
 }
