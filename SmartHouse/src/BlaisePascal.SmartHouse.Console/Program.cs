@@ -12,6 +12,8 @@ class Program
 {
     static void Main(string[] args)
     {
+
+
         Guid id = Guid.NewGuid();
         Lamp lamp = new Lamp(35.0, 800, 5000, 60, "pir");
         lamp.setLampType("led");

@@ -9,7 +9,7 @@ namespace BlaisePascal.SmartHouse.Application
     public class Add_CCTV_Command
     {
         private readonly ICCTVRepository _cctvRepository;
-        Name="lampRepository"
+        Name = "lampRepository"
         public Add_CCTV_Command(ICCTVRepository cctvRepository)
         {
             _cctvRepository = cctvRepository;

@@ -9,7 +9,7 @@ namespace BlaisePascal.SmartHouse.Application
     public class AddLampCommand
     {
         private readonly ILampRepository _lampRepository;
-        Name="lampRepository"
+        Name = "lampRepository"
         public AddLampCommand(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
