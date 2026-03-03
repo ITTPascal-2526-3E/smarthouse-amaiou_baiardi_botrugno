@@ -181,5 +181,6 @@ class Program
         lampsRow.changeColor(newLamp.Id, "white");
         Console.WriteLine("Colore cambiato per la lampada con guid specificato: ");
 
+         //commento per fare un push dio 
     }
 }
