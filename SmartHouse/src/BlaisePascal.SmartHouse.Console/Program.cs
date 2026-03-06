@@ -6,6 +6,7 @@ using System.Reflection;
 using Color = BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Color;
 using System;
 using BlaisePascal.SmartHouse;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 namespace BlaisePascal.SmartHouse.Domain { }
 
 
@@ -19,7 +20,7 @@ class Program
         salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
 
         AirConditioner ac = new AirConditioner(22.0);
-        CCTV telecamera = new CCTV();
+        CCTV telecamera = new CCTV(new Name("Ake"));
         Door portaIngresso = new Door(false, "acciaio", true, false, 10.0, 5.0, 4.0);
 
         bool continua = true;

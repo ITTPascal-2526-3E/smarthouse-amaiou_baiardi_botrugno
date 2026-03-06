@@ -12,7 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices.Repositories
         void Add(CCTV cctv);
         void Update(CCTV cctv);
         void Remove(Guid id);
-        Door GetById(Guid id);
+        CCTV GetById(Guid id);
         List<CCTV> GetAll();
     }
 }

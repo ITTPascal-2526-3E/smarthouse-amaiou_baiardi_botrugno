@@ -17,7 +17,7 @@ namespace BlaisePascal.SmartHouse.Application
             _repository = repository;
         }
 
-        public cctv Execute(Guid id)
+        public CCTV Execute(Guid id)
         {
             return _repository.GetById(id);
         }
