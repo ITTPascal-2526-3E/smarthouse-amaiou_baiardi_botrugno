@@ -16,12 +16,15 @@ class Program
     {
         // Inizializzazione del sistema completo
         LampsRow salottoLamps = new LampsRow();
-        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, "pir"));
+        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, "pir", new Name("botru")));
         salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
 
         AirConditioner ac = new AirConditioner(22.0);
         CCTV telecamera = new CCTV(new Name("Ake"));
-        Door portaIngresso = new Door(false, "acciaio", true, false, 10.0, 5.0, 4.0);
+        Door portaIngresso = new Door(false, "acciaio", true, false, 10.0, 5.0, 4.0, new Name("vitto"));
+
+        // Friggitrice (kitchen device) di esempio
+        Fryer fryer = new Fryer(180.0, 5, "olio", new Name("FriggitriceCucina"));
 
         bool continua = true;
 
@@ -32,6 +35,7 @@ class Program
             Console.WriteLine("1.  Gestisci Gruppo Luci (LampsRow)");
             Console.WriteLine("2.  Gestisci Condizionatore");
             Console.WriteLine("3.  Gestisci Sicurezza (CCTV & Porta)");
+            Console.WriteLine("4.  Gestisci Kitchen Devices");
             Console.WriteLine("0.  Esci dal sistema");
             Console.Write("\nSeleziona un'opzione: ");
 
@@ -47,6 +51,9 @@ class Program
                     break;
                 case "3":
                     MenuSicurezza(telecamera, portaIngresso);
+                    break;
+                case "4":
+                    MenuKitchen(fryer);
                     break;
                 case "0":
                     continua = false;
@@ -134,6 +141,96 @@ class Program
                 Console.WriteLine("Stato della porta cambiato.");
                 break;
         }
+        Console.WriteLine("Premi un tasto per tornare al menu principale...");
+        Console.ReadKey();
+    }
+
+    // ---- SOTTOMENU GESTIONE KITCHEN DEVICES (es. Fryer) ----
+    static void MenuKitchen(Fryer fryer)
+    {
+        Console.WriteLine("\n[MENU KITCHEN DEVICES]");
+        Console.WriteLine("a. Accendi friggitrice");
+        Console.WriteLine("b. Spegni friggitrice");
+        Console.WriteLine("c. Cambia stato cestello (up/down)");
+        Console.WriteLine("d. Imposta temperatura");
+        Console.WriteLine("e. Imposta numero fritture prima cambio olio");
+        Console.WriteLine("0. Torna al menu principale");
+
+        char op = Console.ReadKey(true).KeyChar;
+        switch (op)
+        {
+            case 'a':
+                try
+                {
+                    fryer.TurnOn();
+                    Console.WriteLine("Friggitrice accesa.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Errore: {ex.Message}");
+                }
+                break;
+            case 'b':
+                try
+                {
+                    fryer.TurnOff();
+                    Console.WriteLine("Friggitrice spenta.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Errore: {ex.Message}");
+                }
+                break;
+            case 'c':
+                fryer.changeBasketStatus();
+                Console.WriteLine($"Stato cestello: {fryer.basketStatus}");
+                break;
+            case 'd':
+                Console.Write("\nInserisci temperatura (es. 180.0): ");
+                if (double.TryParse(Console.ReadLine(), out double temp))
+                {
+                    try
+                    {
+                        fryer.changeTemp(temp);
+                        Console.WriteLine($"Temperatura impostata a {fryer.temperature}°C");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Errore: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Valore temperatura non valido.");
+                }
+                break;
+            case 'e':
+                Console.Write("\nInserisci numero fritture prima cambio olio (intero): ");
+                if (int.TryParse(Console.ReadLine(), out int n))
+                {
+                    try
+                    {
+                        fryer.change_NumberOfFryer_BeforeChangeOil(n);
+                        Console.WriteLine($"Numero impostato a {fryer.numberOfFryerBeforeChangeOil}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Errore: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Valore non valido.");
+                }
+                break;
+            case '0':
+                // torna al menu principale semplicemente ritornando
+                break;
+            default:
+                Console.WriteLine("Scelta non valida.");
+                break;
+        }
+
         Console.WriteLine("Premi un tasto per tornare al menu principale...");
         Console.ReadKey();
     }

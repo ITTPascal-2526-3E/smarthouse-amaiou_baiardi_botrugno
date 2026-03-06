@@ -11,15 +11,14 @@ namespace BlaisePascal.SmartHouse.Application
     public class AddDoorCommand
     {
         private readonly IDoorRepository _doorRepository;
-        Name="doorRepository"
         public AddDoorCommand(IDoorRepository doorRepository)
-        {
+        { 
             _doorRepository = doorRepository;
         }
         public void Execute(string name, string imageUrl)
         {
-            var door = new Door(new Name(name));
+            var door = new Door(true, "wood", true, false, 10.0, 20.0, 10.0, new Name(name));
             _doorRepository.Add(door);
-        }
+         }
     }
 }

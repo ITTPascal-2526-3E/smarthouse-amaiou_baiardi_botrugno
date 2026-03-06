@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions; 
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 {
@@ -21,7 +22,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
         public bool LockStatus { get; set; }
 
         // aggiungere funzioni in modo da poter cambiare lo stato della porta (aperta/chiusa), la lunghezza, se è antiproiettile, se è porta d'ingresso o porta interna ecc 
-        public Door(bool IsOpen, string Material, bool IsEnterHouseDoor, bool IsInsideHouseDoor, double Height, double Length, double Width)
+        public Door(bool IsOpen, string Material, bool IsEnterHouseDoor, bool IsInsideHouseDoor, double Height, double Length, double Width, Name name)
         {
             Id = Guid.NewGuid();
             isOpen = IsOpen;

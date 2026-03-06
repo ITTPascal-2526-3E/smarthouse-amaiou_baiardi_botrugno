@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public class Lamp : Iswitchable, IsetLuminousDeviceSettings
@@ -9,7 +9,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public string Name { get; protected set; }
         public LampType LampType { get; protected set; }
         public double LampHeat { get; protected set; }
-        public EnergyClass EnergyClass { get; protected set; }
+        public EnergyClass EnergyClass { get; protected set; } 
         public int brightness { get; set; }
         public int Lumen { get;protected set; }
         public Color color { get; protected set; }
@@ -20,7 +20,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public bool status = false;
 
         //Costruttore di Lamp
-        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness,string name)
+        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness,string name, Name name)
         {
             Id = Guid.NewGuid();
             status = false;

@@ -13,7 +13,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices.Repositories
         void Add(Fryer fryer);
         void Update(Fryer fryer);
         void Remove(Guid id);
-        Door GetById(Guid id);
+        Fryer GetById(Guid id);
         List<Fryer> GetAll();
     }
 }

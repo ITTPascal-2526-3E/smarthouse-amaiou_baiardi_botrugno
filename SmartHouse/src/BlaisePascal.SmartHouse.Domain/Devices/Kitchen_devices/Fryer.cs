@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
     public sealed class Fryer : Iswitchable
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public Name name { get; set; }
         private string type { get; set; }// a olio o ad aria
         public string basketStatus;  // status basket può essere down o up
         public double temperature { get; set; }
@@ -22,12 +24,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices
         public bool status = false;
 
 
-        public Fryer(double startTemperature, int defaultNumberOfFryerBeforeChangeOil, string tipo)
+        public Fryer(double startTemperature, int defaultNumberOfFryerBeforeChangeOil, string tipo, Name name)
         {
             basketStatus = "down";
             temperature = startTemperature; // temperatura di default
             numberOfFryerBeforeChangeOil = defaultNumberOfFryerBeforeChangeOil; // numero di fritture di default
             type = tipo;
+            this.name = name;
+
         }
         public void TurnOn()
         {

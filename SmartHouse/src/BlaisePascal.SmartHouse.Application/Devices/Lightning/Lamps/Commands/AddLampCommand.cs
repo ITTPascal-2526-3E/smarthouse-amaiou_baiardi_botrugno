@@ -9,14 +9,13 @@ namespace BlaisePascal.SmartHouse.Application
     public class AddLampCommand
     {
         private readonly ILampRepository _lampRepository;
-        Name = "lampRepository"
         public AddLampCommand(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
         public void Execute(string name, string imageUrl)
         {
-            var Lamp = new Lamp(new Name(name));
+            var Lamp = new Lamp(30, 50, 35, 25, "vitto", new Name(name));
             _lampRepository.Add(Lamp);
         }
     }

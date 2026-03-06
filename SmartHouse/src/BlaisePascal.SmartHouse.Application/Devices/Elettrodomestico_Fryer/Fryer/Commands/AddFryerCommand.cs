@@ -9,14 +9,13 @@ namespace BlaisePascal.SmartHouse.Application
     public class AddFryerCommand
     {
         private readonly IFryerRepository _fryerRepository;
-        Name="fryerRepository"
         public AddFryerCommand(IFryerRepository fryerRepository)
         {
             _fryerRepository = fryerRepository;
         }
         public void Execute(string name, string imageUrl)
         {
-            var door = new Fryer(new Name(name));
+            var fryer = new Fryer(10.0, 7, "air", new Name(name));
             _fryerRepository.Add(fryer);
         }
     }
