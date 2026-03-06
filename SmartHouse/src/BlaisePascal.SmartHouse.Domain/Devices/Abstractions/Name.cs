@@ -35,5 +35,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             }
 
         }
+
+        public static implicit operator string(Name v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

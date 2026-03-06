@@ -1,5 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using System.Runtime.InteropServices;
+using System.Xml.Linq;
 namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public class Lamp : Iswitchable, IsetLuminousDeviceSettings
@@ -20,7 +21,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public bool status = false;
 
         //Costruttore di Lamp
-        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness,string name, Name name)
+        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness, Name name)
         {
             Id = Guid.NewGuid();
             status = false;
@@ -88,7 +89,17 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 throw new InvalidOperationException("Color can be changed only for LED lamps.");
             }
         }
-
+        public Color getColor()
+        {
+            if (LampType == LampType.led)
+            {
+                return color;
+            }
+            else
+            {
+                throw new InvalidOperationException("Color can be changed only for LED lamps.");
+            }
+        }
         //Imposta la luminosità della lampada
         public void setBrightness(int brightness)
         {
@@ -101,6 +112,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
                 throw new ArgumentOutOfRangeException("Brightness must be in range");
             }
         }
-       
+        public string getName()
+        {
+            return Name;
+        }
+
     }
 }
