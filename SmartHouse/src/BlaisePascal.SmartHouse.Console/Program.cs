@@ -16,12 +16,12 @@ class Program
     {
         // Inizializzazione del sistema completo
         LampsRow salottoLamps = new LampsRow();
-        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, new Name("botru")));
-        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, new Name("vitto")));
+        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, new Name("Botru")));
+        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, new Name("Vitto")));
 
         AirConditioner ac = new AirConditioner(22.0);
         CCTV telecamera = new CCTV(new Name("Ake"));
-        Door portaIngresso = new Door(false, "acciaio", true, false, 10.0, 5.0, 4.0, new Name("vitto"));
+        Door portaIngresso = new Door(false, "Acciaio", true, false, 10.0, 5.0, 4.0, new Name("Vitto"));
 
         // Friggitrice (kitchen device) di esempio
         Fryer fryer = new Fryer(180.0, 5, "olio", new Name("FriggitriceCucina"));
