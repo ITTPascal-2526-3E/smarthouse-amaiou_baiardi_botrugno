@@ -25,6 +25,7 @@ class Program
 
         // Friggitrice (kitchen device) di esempio
         Fryer fryer = new Fryer(180.0, 5, "olio", new Name("FriggitriceCucina"));
+        Forno forno = new Forno(Guid.NewGuid(), new Name("FornoCucina"));
 
         bool continua = true;
 
@@ -53,7 +54,7 @@ class Program
                     MenuSicurezza(telecamera, portaIngresso);
                     break;
                 case "4":
-                    MenuKitchen(fryer);
+                    MenuKitchen(fryer, forno);
                     break;
                 case "0":
                     continua = false;
@@ -146,19 +147,31 @@ class Program
     }
 
     // ---- SOTTOMENU GESTIONE KITCHEN DEVICES (es. Fryer) ----
-    static void MenuKitchen(Fryer fryer)
+    static void MenuKitchen(Fryer fryer, Forno forno)
     {
         Console.WriteLine("\n[MENU KITCHEN DEVICES]");
+        Console.WriteLine("FRIGGITRICE");
         Console.WriteLine("a. Accendi friggitrice");
         Console.WriteLine("b. Spegni friggitrice");
         Console.WriteLine("c. Cambia stato cestello (up/down)");
-        Console.WriteLine("d. Imposta temperatura");
+        Console.WriteLine("d. Imposta temperatura friggitrice");
         Console.WriteLine("e. Imposta numero fritture prima cambio olio");
-        Console.WriteLine("0. Torna al menu principale");
+
+        Console.WriteLine("\nFORNO");
+        Console.WriteLine("f. Accendi forno");
+        Console.WriteLine("g. Spegni forno");
+        Console.WriteLine("h. Imposta temperatura forno");
+        Console.WriteLine("i. Cambia modalità forno");
+        Console.WriteLine("l. Imposta timer forno");
+
+        Console.WriteLine("\n0. Torna al menu principale");
 
         char op = Console.ReadKey(true).KeyChar;
+
         switch (op)
         {
+            // -------- FRYER --------
+
             case 'a':
                 try
                 {
@@ -170,6 +183,7 @@ class Program
                     Console.WriteLine($"Errore: {ex.Message}");
                 }
                 break;
+
             case 'b':
                 try
                 {
@@ -181,12 +195,14 @@ class Program
                     Console.WriteLine($"Errore: {ex.Message}");
                 }
                 break;
+
             case 'c':
                 fryer.changeBasketStatus();
                 Console.WriteLine($"Stato cestello: {fryer.basketStatus}");
                 break;
+
             case 'd':
-                Console.Write("\nInserisci temperatura (es. 180.0): ");
+                Console.Write("\nInserisci temperatura friggitrice: ");
                 if (double.TryParse(Console.ReadLine(), out double temp))
                 {
                     try
@@ -204,8 +220,9 @@ class Program
                     Console.WriteLine("Valore temperatura non valido.");
                 }
                 break;
+
             case 'e':
-                Console.Write("\nInserisci numero fritture prima cambio olio (intero): ");
+                Console.Write("\nInserisci numero fritture prima cambio olio: ");
                 if (int.TryParse(Console.ReadLine(), out int n))
                 {
                     try
@@ -223,9 +240,99 @@ class Program
                     Console.WriteLine("Valore non valido.");
                 }
                 break;
-            case '0':
-                // torna al menu principale semplicemente ritornando
+
+            // -------- FORNO --------
+
+            case 'f':
+                try
+                {
+                    forno.TurnOn();
+                    Console.WriteLine("Forno acceso.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Errore: {ex.Message}");
+                }
                 break;
+
+            case 'g':
+                try
+                {
+                    forno.TurnOff();
+                    Console.WriteLine("Forno spento.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Errore: {ex.Message}");
+                }
+                break;
+
+            case 'h':
+                Console.Write("\nInserisci temperatura forno: ");
+                if (int.TryParse(Console.ReadLine(), out int tempForno))
+                {
+                    try
+                    {
+                        forno.SetTemperatura(tempForno);
+                        Console.WriteLine($"Temperatura forno impostata a {tempForno}°C");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Errore: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Valore temperatura non valido.");
+                }
+                break;
+
+            case 'i':
+                Console.WriteLine("\nSeleziona modalità forno:");
+                Console.WriteLine("1. Statico");
+                Console.WriteLine("2. Ventilato");
+                Console.WriteLine("3. Grill");
+                Console.WriteLine("4. Scongelamento");
+                Console.WriteLine("5. Pizza");
+
+                if (int.TryParse(Console.ReadLine(), out int scelta))
+                {
+                    try
+                    {
+                        ModalitaForno modalita = (ModalitaForno)(scelta - 1);
+                        forno.SetModalita(modalita);
+                        Console.WriteLine($"Modalità impostata: {modalita}");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Modalità non valida.");
+                    }
+                }
+                break;
+
+            case 'l':
+                Console.Write("\nInserisci durata timer in minuti: ");
+                if (int.TryParse(Console.ReadLine(), out int minuti))
+                {
+                    try
+                    {
+                        forno.SetTimer(TimeSpan.FromMinutes(minuti));
+                        Console.WriteLine($"Timer impostato a {minuti} minuti.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Errore: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Valore non valido.");
+                }
+                break;
+
+            case '0':
+                return;
+
             default:
                 Console.WriteLine("Scelta non valida.");
                 break;
