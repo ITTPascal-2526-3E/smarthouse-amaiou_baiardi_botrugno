@@ -1,5 +1,4 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices;
-using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

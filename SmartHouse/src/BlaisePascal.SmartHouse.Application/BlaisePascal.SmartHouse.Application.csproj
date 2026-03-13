@@ -7,12 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+    <EmbeddedResource Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+    <None Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlaisePascal.SmartHouse.Domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Devices\DispositivoCCTV\CCTV\Dto\" />
     <Folder Include="Devices\DispositivoCCTV\CCTV\Mappers\" />
+    <Folder Include="Devices\Elettrodomestico_Forno\Forno\Dto\" />
+    <Folder Include="Devices\Elettrodomestico_Forno\Forno\Mappers\" />
     <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Dto\" />
     <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Mappers\" />
     <Folder Include="Devices\InfissoDoor\Door\Dto\" />
