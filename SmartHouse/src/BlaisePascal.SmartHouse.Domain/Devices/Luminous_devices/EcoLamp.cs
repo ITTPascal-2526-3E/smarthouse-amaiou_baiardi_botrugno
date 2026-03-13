@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         //Creazione variabili/attributi
         public int DurationBeforeOff { get; private set; }
         //Costruttore di EcoLamp
-        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes, int InitialBrightness, string name) 
+        public EcoLamp(double lampHeat, int lumen, int durationBeforeItFlashes, int InitialBrightness, Name name) 
             : base(lampHeat, lumen, durationBeforeItFlashes, InitialBrightness, name)
         {
             Id = Guid.NewGuid();

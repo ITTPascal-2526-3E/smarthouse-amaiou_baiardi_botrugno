@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -10,8 +11,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
 {
     public sealed class TwoLampsDevice : IsetLuminousDeviceSettings
     {
-        private Lamp lamp = new Lamp(0.0, 0, 0, 6,"vitto");
-        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6, "vitto");
+        private Lamp lamp = new Lamp(0.0, 0, 0, 6, new Name("vitto"));
+        private EcoLamp ecoLamp = new EcoLamp(0.0, 0, 0, 6, new Name("vitto"));
 
         //chiama il costruttore della classe Lamp e assegna l'istanza alla variabile lamp
         public void setLampAttributes(Lamp lamp)

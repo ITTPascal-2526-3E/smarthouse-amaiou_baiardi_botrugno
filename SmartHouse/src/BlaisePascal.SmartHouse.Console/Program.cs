@@ -16,8 +16,8 @@ class Program
     {
         // Inizializzazione del sistema completo
         LampsRow salottoLamps = new LampsRow();
-        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, "pir", new Name("botru")));
-        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, "vitto"));
+        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, new Name("botru")));
+        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, new Name("vitto")));
 
         AirConditioner ac = new AirConditioner(22.0);
         CCTV telecamera = new CCTV(new Name("Ake"));
