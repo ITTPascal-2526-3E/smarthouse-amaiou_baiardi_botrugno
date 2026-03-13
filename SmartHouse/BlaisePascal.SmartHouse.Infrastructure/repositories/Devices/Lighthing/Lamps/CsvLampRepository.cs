@@ -47,10 +47,12 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.Devices.Lightining
             {
                 lines.Add(string.Join(",",
                     dto.Id,
-                    dto.getName,
+                    dto.getName(),
                     dto.getColor(),
-                    dto.setBrightness(20),
+                    dto.brightness,
                     dto.status,
+                    0,
+                    0));
             }
 
             File.WriteAllLines(_filePath, lines);
@@ -58,20 +60,45 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.Devices.Lightining
 
         private List<Lamp> Load()
         {
+            if (!File.Exists(_filePath))
+                return new List<Lamp>();
+
             var lines = File.ReadAllLines(_filePath);
             var lamps = new List<Lamp>();
             foreach (var line in lines.Skip(1))
             {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
                 var parts = line.Split(',');
-                var dto = new Lamp(
-                    bool.Parse(parts[4]),
-                    int.Parse(parts[3]),
-                    false, // Assuming isWireless is false for all lamps in this example
-                    10, // Assuming a default consumationValue for all lamps in this example
-                    new Hour(int.Parse(parts[5])), // lightOnSpecificTime
-                    new Hour(int.Parse(parts[6]))  // lightOffSpecificTime
-                );
-                lamps.Add(dto);
+                if (parts.Length < 5)
+                    continue;
+
+                Guid id;
+                Guid.TryParse(parts[0], out id);
+
+                var name = new Name(parts[1] ?? string.Empty);
+
+                if (!Enum.TryParse<Color>(parts[2], true, out var color))
+                    color = Color.white;
+
+                if (!int.TryParse(parts[3], out var brightness))
+                    brightness = 0;
+
+                if (!bool.TryParse(parts[4], out var isOn))
+                    isOn = false;
+
+                // Build Lamp using the defined constructor:
+                // Lamp(double lampHeat, int lumen, int durationBeforeItFlashes, int Initialbrightness, Name name)
+                // CSV does not contain lampHeat/lumen/duration, use sensible defaults and apply parsed brightness/name afterwards.
+                var lamp = new Lamp(0.0 /*lampHeat*/, 0 /*lumen*/, 0 /*durationBeforeItFlashes*/, brightness, name);
+
+                lamp.Id = id;
+                lamp.color = color;
+                lamp.brightness = brightness;
+                lamp.status = isOn;
+
+                lamps.Add(lamp);
             }
             return lamps;
         }

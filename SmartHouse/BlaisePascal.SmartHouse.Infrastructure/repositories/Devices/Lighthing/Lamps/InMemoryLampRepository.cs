@@ -39,10 +39,7 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.Devices.Lightining
         }
 
 
-        public Lamp GetById(Guid id)
-        {
-            return _lamps.FirstOrDefault(l => l.Id == id);
-        }
+        public Lamp GetById(Guid id) => _lamps.FirstOrDefault(l => l.Id == id);
 
         public void Remove(Guid id)
         {
