@@ -15,7 +15,7 @@ namespace BlaisePascal.SmartHouse.Application
         }
         public void Execute(string name, string imageUrl)
         {
-            var Lamp = new Lamp(30, 50, 35, 25, "vitto", new Name(name));
+            var Lamp = new Lamp(30, 50, 35, 25, new Name(name));
             _lampRepository.Add(Lamp);
         }
     }
