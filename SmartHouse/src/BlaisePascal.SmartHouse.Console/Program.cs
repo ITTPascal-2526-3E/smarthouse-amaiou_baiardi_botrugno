@@ -108,17 +108,51 @@ namespace BlaisePascal.SmartHouse.Domain
             while (!back)
             {
                 Console.Clear();
-                Console.WriteLine("=== [CONTROLLO CLIMATIZZAZIONE] ===");
-                Console.WriteLine($"Stato attuale: {ac.temp}°C");
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine(" [+] Aumenta temp. | [-] Diminuisci temp.");
-                Console.WriteLine(" [0] Salva e torna indietro");
-                Console.Write("\nComando: ");
+                Console.WriteLine("========================================");
+                Console.WriteLine("      CONTROLLO CLIMATIZZATORE         ");
+                Console.WriteLine("========================================");
+
+                // Visualizzazione Stato e Temperatura
+                string statoTesto = ac.status ? "ON" : "OFF";
+                Console.WriteLine($" STATO: [{statoTesto}]");
+                Console.WriteLine($" TEMPERATURA IMPOSTATA: {ac.temp}°C");
+                Console.WriteLine("----------------------------------------");
+
+                // Opzioni
+                Console.WriteLine(" [1] Accendi / Spegni");
+                Console.WriteLine(" [+] Aumenta Temperatura");
+                Console.WriteLine(" [-] Diminuisci Temperatura");
+                Console.WriteLine(" [0] Torna al Menu Principale");
+                Console.WriteLine("----------------------------------------");
+                Console.Write(" Scegli un comando: ");
 
                 char op = Console.ReadKey(true).KeyChar;
-                if (op == '+') ac.increaseTemp();
-                else if (op == '-') ac.decreaseTemp();
-                else if (op == '0') back = true;
+
+                switch (op)
+                {
+                    case '1':
+                        // Toggle dello stato
+                        if (ac.status) ac.TurnOff(); else ac.TurnOn();
+                        break;
+
+                    case '+':
+                        // Aumenta la temperatura
+                        ac.increaseTemp();
+                        break;
+
+                    case '-':
+                        // Diminuisce la temperatura
+                        ac.decreaseTemp();
+                        break;
+
+                    case '0':
+                        back = true;
+                        break;
+
+                    default:
+                        // Ignora altri tasti o aggiungi un messaggio se preferisci
+                        break;
+                }
             }
         }
 
