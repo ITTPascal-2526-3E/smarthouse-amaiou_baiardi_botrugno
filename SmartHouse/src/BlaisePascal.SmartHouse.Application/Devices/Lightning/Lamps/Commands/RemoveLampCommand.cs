@@ -22,7 +22,7 @@ namespace BlaisePascal.SmartHouse.Application
 
             // 2. Cerchiamo la lampada che ha lo stesso nome (confrontando le stringhe Value)
             var lampToRemove = lamps.FirstOrDefault(l =>
-                l.Name.value.Equals(name.Value, StringComparison.OrdinalIgnoreCase));
+                l.Name.Equals(name.Value, StringComparison.OrdinalIgnoreCase));
 
             // 3. Validazione: se non esiste, lanciamo un'eccezione
             if (lampToRemove == null)

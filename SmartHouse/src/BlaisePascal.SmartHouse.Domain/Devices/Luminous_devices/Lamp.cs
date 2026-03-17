@@ -29,7 +29,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.Lumen = lumen;
             this.DurationBeforeItFlashes = durationBeforeItFlashes;
             this.brightness = Initialbrightness;
-            this.Name = name.value;
+            this.Name = name.Value;
         }
         // accendi e spegni la lampada
         public void TurnOn()

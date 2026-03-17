@@ -64,18 +64,24 @@ namespace BlaisePascal.SmartHouse.Domain.Controller
 
         public void RemoveLamp()
         {
-            Console.Write("Enter lamp name or ID to remove: ");
+            Console.Write("Inserisci il NOME della lampada da rimuovere: ");
             string input = Console.ReadLine();
-            var lamp = FindLamp(input);
 
-            if (lamp != null)
+            try
             {
-                new RemoveLampCommand(_lampRepository).Execute(lamp.Id);
-                Console.WriteLine($"!Lamp '{lamp.getName()}' removed!");
+                // 1. Creiamo il Value Object Name dall'input stringa
+                // Questo risolve l'errore CS1503 perché ora passiamo un 'Name' e non un 'Guid'
+                Name nameObj = Name.From(input);
+
+                // 2. Eseguiamo il comando passando l'oggetto nameObj
+                var command = new RemoveLampCommand(_lampRepository);
+                command.Execute(nameObj);
+
+                Console.WriteLine($"Lampada '{input}' rimossa con successo.");
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Lamp not found.");
+                Console.WriteLine($"Errore: {ex.Message}");
             }
         }
 
