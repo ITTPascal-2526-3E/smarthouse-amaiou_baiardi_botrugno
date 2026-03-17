@@ -1,100 +1,113 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
-using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
 using System;
+using Xunit;
+
 namespace BlaisePascal.SmartHouse.Domain.UnitTests
 {
     public class LampsRowTest
     {
+        // Helper per creare un oggetto Name valido
+        private Name GetName(string value) => new Name(value);
+
         [Fact]
-        public void SwitchOn_ShouldSetStatusTrue_AndStatusIsFalse()
+        public void SwitchOn_ShouldTurnOnSpecificLamp()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-            
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
+
+            // Act
             row.SwitchOn(lamp1.Id);
 
+            // Assert
             Assert.True(lamp1.status);
         }
 
-        public void SwitchOn_ShouldSetStatusTrue_AndStatusIsTrue()
+        [Fact] // Mancava l'attributo Fact
+        public void SwitchOn_ShouldThrow_WhenLampIsAlreadyOn()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
-            row.SwitchOn(lamp1.Id);
+            row.SwitchOn(lamp1.Id); // La accendo la prima volta
 
-            Assert.Throws<Exception>(() => row.SwitchOn(lamp1.Id));
+            // Act & Assert
+            // Nota: L'eccezione viene lanciata da lamp1.TurnOn() chiamato dentro row.SwitchOn
+            Assert.Throws<InvalidOperationException>(() => row.SwitchOn(lamp1.Id));
         }
-        [Fact]
-        public void SwitchOff_ShouldSetStatusFalse_AndStatusIsTrue()
-        {
-            var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
 
+        [Fact]
+        public void SwitchOff_ShouldTurnOffSpecificLamp()
+        {
+            // Arrange
+            var row = new LampsRow();
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
+            row.SwitchOn(lamp1.Id); // Prima accendo
+
+            // Act
             row.SwitchOff(lamp1.Id);
 
+            // Assert
             Assert.False(lamp1.status);
         }
 
-        public void SwitchOff_ShouldSetStatusFalse_AndStatusIsFalse()
-        {
-            var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-
-            row.AddLamp(lamp1);
-            row.SwitchOff(lamp1.Id);
-
-            Assert.Throws<Exception>(() => row.SwitchOff(lamp1.Id));
-        }
         [Fact]
-        public void SetIntensityForLamp_ShouldSetIntensity_AndIntensityValueIsCorrect()
+        public void SetIntensityForLamp_ShouldUpdateBrightness_WhenValueIsValid()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
-            row.SetIntensityForLamp(lamp1.Id,77);
 
-            Assert.Equal(lamp1.brightness,77);
+            // Act
+            row.SetIntensityForLamp(lamp1.Id, 77);
+
+            // Assert
+            Assert.Equal(77, lamp1.brightness);
         }
 
-        public void SetIntensityForLamp_ShouldSetIntensity_AndIntensityValueIsNotCorrect()
+        [Fact] // Mancava Fact
+        public void SetIntensityForLamp_ShouldThrow_WhenIntensityIsNegative()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
-            row.SetIntensityForLamp(lamp1.Id,-1);
 
-            Assert.Throws<Exception>(() => row.SetIntensityForLamp(lamp1.Id,-1));
+            // Act & Assert
+            // Assumendo che setBrightness lanci ArgumentOutOfRangeException per valori negativi
+            Assert.Throws<ArgumentOutOfRangeException>(() => row.SetIntensityForLamp(lamp1.Id, -1));
         }
+
         [Fact]
-        public void changeColor_ShouldSetColor_AndColorValueIsCorrect()
+        public void changeColor_ShouldUpdateColor_WhenValueIsCorrect()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
-
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
             row.AddLamp(lamp1);
+
+            // Act
             row.changeColor(lamp1.Id, "pink");
 
-            Assert.Equal(lamp1.color, Color.pink);
+            // Assert
+            Assert.Equal(Color.pink, lamp1.color);
         }
 
-        public void changeColor_ShouldSetColor_AndColorValueIsNotCorrect()
+        [Fact]
+        public void AddLampInPosition_ShouldThrow_WhenPositionIsInvalid()
         {
+            // Arrange
             var row = new LampsRow();
-            var lamp1 = new Lamp(10.0, 800, 1000, 50, "Lamp1");
+            var lamp1 = new Lamp(10.0, 800, 1000, 50, GetName("Lamp1"));
 
-            row.AddLamp(lamp1);
-            row.changeColor(lamp1.Id,"");
-
-            Assert.Throws<Exception>(() => row.changeColor(lamp1.Id,""));
+            // Act & Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => row.AddLampInPosition(lamp1, 99));
         }
-
-
     }
 }
