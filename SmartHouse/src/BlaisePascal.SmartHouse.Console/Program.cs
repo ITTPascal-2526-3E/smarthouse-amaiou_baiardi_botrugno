@@ -126,7 +126,7 @@ namespace BlaisePascal.SmartHouse.Domain
         {
             Console.Clear();
             Console.WriteLine("=== [SISTEMA DI SICUREZZA] ===");
-            Console.WriteLine($"1. Telecamera Ake:  [{(cctv.IsArmed ? "ARMATA" : "DISARMATA")}]");
+            Console.WriteLine($"1. Telecamera Ake:  [{(cctv.IsArmed ? "ACCESA" : "SPENTA")}]");
             Console.WriteLine($"2. Serratura Porta: [{(porta.isOpen ? "APERTA" : "CHIUSA")}]");
             Console.WriteLine("0. Torna indietro");
             Console.WriteLine("------------------------------");
