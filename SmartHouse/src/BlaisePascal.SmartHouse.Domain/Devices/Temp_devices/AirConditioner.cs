@@ -18,6 +18,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         public bool energySavingMode = false;
         private string name = " ";
         public bool status = false;
+        public funSpeed currentSpeed = funSpeed.Low;
 
 
         public AirConditioner(double initialTemp)
@@ -72,7 +73,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Temp_devices
         {
             if (status == true)
             {
-                funSpeed currentSpeed = funSpeed.Low;
                 switch (currentSpeed)
                 {
                     case funSpeed.Low:

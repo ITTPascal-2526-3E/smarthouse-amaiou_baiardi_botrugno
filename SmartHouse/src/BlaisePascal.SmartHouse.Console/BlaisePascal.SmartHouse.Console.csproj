@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlaisePascal.SmartHouse.Infrastructure\BlaisePascal.SmartHouse.Infrastructure.csproj" />
     <ProjectReference Include="..\BlaisePascal.SmartHouse.Application\BlaisePascal.SmartHouse.Application.csproj" />
   </ItemGroup>
 

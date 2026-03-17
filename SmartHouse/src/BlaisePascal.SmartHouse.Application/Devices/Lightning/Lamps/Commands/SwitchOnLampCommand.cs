@@ -11,18 +11,16 @@ namespace BlaisePascal.SmartHouse.Application.Devices
 {
     public class SwitchOnLampCommand
     {
-        private ILampRepository _repository;
-        public SwitchOnLampCommand(ILampRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly ILampRepository _repository;
+        public SwitchOnLampCommand(ILampRepository repository) => _repository = repository;
+
         public void Execute(Guid lampId)
         {
             var lamp = _repository.GetById(lampId);
             if (lamp != null)
             {
                 lamp.TurnOn();
-                _repository.Update(lamp);
+                _repository.Update(lamp); // Sincronizza lo stato nel repo
             }
         }
     }

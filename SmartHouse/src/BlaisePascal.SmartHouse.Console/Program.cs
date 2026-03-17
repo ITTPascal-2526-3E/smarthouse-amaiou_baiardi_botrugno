@@ -1,344 +1,228 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices;
+﻿using System;
+using BlaisePascal.SmartHouse.Domain.Controller;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Kitchen_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
+using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Repositories;
 using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Temp_devices;
-using System.Reflection;
-using Color = BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Color;
-using System;
-using BlaisePascal.SmartHouse;
-using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
-namespace BlaisePascal.SmartHouse.Domain { }
+using BlaisePascal.SmartHouse.Infrastructure.Repositories.Devices.Lightining.Lamps;
 
-
-class Program
+namespace BlaisePascal.SmartHouse.Domain
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Inizializzazione del sistema completo
-        LampsRow salottoLamps = new LampsRow();
-        salottoLamps.AddLamp(new Lamp(35.0, 800, 5000, 60, new Name("Botru")));
-        salottoLamps.AddLamp(new EcoLamp(20.0, 400, 5000, 60, new Name("Vitto")));
-
-        AirConditioner ac = new AirConditioner(22.0);
-        CCTV telecamera = new CCTV(new Name("Ake"));
-        Door portaIngresso = new Door(false, "Acciaio", true, false, 10.0, 5.0, 4.0, new Name("Vitto"));
-
-        // Friggitrice (kitchen device) di esempio
-        Fryer fryer = new Fryer(180.0, 5, "olio", new Name("FriggitriceCucina"));
-        Forno forno = new Forno(Guid.NewGuid(), new Name("FornoCucina"));
-
-        bool continua = true;
-
-        while (continua)
+        static void Main(string[] args)
         {
-            Console.Clear(); // Pulisce la console per un menu più ordinato
-            Console.WriteLine("=== SMART HOME CONTROL PANEL ===");
-            Console.WriteLine("1.  Gestisci Gruppo Luci (LampsRow)");
-            Console.WriteLine("2.  Gestisci Condizionatore");
-            Console.WriteLine("3.  Gestisci Sicurezza (CCTV & Porta)");
-            Console.WriteLine("4.  Gestisci Kitchen Devices");
-            Console.WriteLine("0.  Esci dal sistema");
-            Console.Write("\nSeleziona un'opzione: ");
+            // --- setup iniziali invariati ---
+            ILampRepository lampRepository = new InMemoryLampRepository();
+            lampRepository.AddLamp(new Lamp(35.0, 800, 5000, 60, new Name("Botru")));
+            lampRepository.AddLamp(new EcoLamp(20.0, 400, 5000, 60, new Name("Vitto")));
 
-            string scelta = Console.ReadLine();
+            LampController lampController = new LampController(lampRepository);
+            LampsRow salottoGroup = new LampsRow();
+            salottoGroup.AddLamp(new Lamp(30, 500, 4000, 50, new Name("LampadaQuadro")));
 
-            switch (scelta)
+            AirConditioner airConditioner = new AirConditioner(22.0);
+            CCTV camera = new CCTV(new Name("Ake"));
+            Door mainDoor = new Door(false, "Acciaio", true, false, 10.0, 5.0, 4.0, new Name("Ingresso"));
+            Fryer fryer = new Fryer(180.0, 5, "Olio", new Name("FriggitriceCucina"));
+            Forno forno = new Forno(Guid.NewGuid(), new Name("FornoPrincipale"));
+
+            bool running = true;
+
+            while (running)
             {
-                case "1":
-                    MenuLampsRow(salottoLamps);
-                    break;
-                case "2":
-                    MenuAC(ac);
-                    break;
-                case "3":
-                    MenuSicurezza(telecamera, portaIngresso);
-                    break;
-                case "4":
-                    MenuKitchen(fryer, forno);
-                    break;
-                case "0":
-                    continua = false;
-                    Console.WriteLine("Chiusura del pannello di controllo...");
-                    break;
-                default:
-                    Console.WriteLine("Scelta non valida. Premi un tasto per riprovare.");
+                Console.Clear();
+                Console.WriteLine("========================================");
+                Console.WriteLine("    BLAISE PASCAL - SMART HOUSE HUB     ");
+                Console.WriteLine("========================================");
+                Console.WriteLine("1. [Luci]    Gestione Gruppo Salotto");
+                Console.WriteLine("2. [Clima]   Controllo Temperatura");
+                Console.WriteLine("3. [Safe]    Sicurezza e Ingressi");
+                Console.WriteLine("4. [Kitchen] Elettrodomestici Cucina");
+                Console.WriteLine("5. [Expert]  Advanced Lamp Controller");
+                Console.WriteLine("0. Esci dal sistema");
+                Console.WriteLine("----------------------------------------");
+                Console.Write("Scegli l'area da gestire: ");
+
+                string choice = Console.ReadLine();
+
+                try
+                {
+                    switch (choice)
+                    {
+                        case "1": MenuLampsRow(salottoGroup); break;
+                        case "2": MenuAC(airConditioner); break;
+                        case "3": MenuSicurezza(camera, mainDoor); break;
+                        case "4": MenuKitchen(fryer, forno); break;
+                        case "5": MenuLampController(lampController); break;
+                        case "0": running = false; break;
+                        default:
+                            Console.WriteLine("\n[!] Scelta non valida. Riprova.");
+                            Console.ReadKey();
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\n[ERRORE]: {ex.Message}");
+                    Console.WriteLine("Premi un tasto per tornare al menù principale...");
                     Console.ReadKey();
-                    break;
+                }
             }
         }
-    }
 
-    // --- SOTTOMENU LAMPSROW (Gruppo di luci) ---
-    static void MenuLampsRow(LampsRow row)
-    {
-        Console.WriteLine("\n[MENU GRUPPO LUCI SALOTTO]");
-        Console.WriteLine("a. Accendi tutte le luci");
-        Console.WriteLine("b. Spegni tutte le luci");
-        Console.WriteLine("c. Imposta intensità per tutte (0-100)");
+        // --- SOTTOMENU MIGLIORATI ---
 
-        char op = Console.ReadKey(true).KeyChar;
-        switch (op)
+        static void MenuLampsRow(LampsRow row)
         {
-            case 'a':
-                row.SwitchOn();
-                Console.WriteLine("Tutte le luci sono state ACCESE.");
-                break;
-            case 'b':
-                row.SwitchOff();
-                Console.WriteLine("Tutte le luci sono state SPENTE.");
-                break;
-            case 'c':
-                Console.Write("\nInserisci intensità (0-100): ");
-                if (int.TryParse(Console.ReadLine(), out int lum))
-                {
-                    row.SetIntensityForAllLamps(lum);
-                    Console.WriteLine($"Intensità impostata a {lum} per tutte le lampade.");
-                }
-                break;
-        }
-        Console.WriteLine("Premi un tasto per tornare al menu principale...");
-        Console.ReadKey();
-    }
+            Console.Clear();
+            Console.WriteLine("=== [GESTIONE GRUPPO LUCI SALOTTO] ===");
+            Console.WriteLine("Comandi disponibili:");
+            Console.WriteLine(" [A] Accendi tutte");
+            Console.WriteLine(" [B] Spegni tutte");
+            Console.WriteLine(" [C] Imposta intensità comune");
+            Console.WriteLine(" [0] Torna indietro");
+            Console.WriteLine("--------------------------------------");
+            Console.Write("Digita il comando: ");
 
-    // --- SOTTOMENU CONDIZIONATORE ---
-    static void MenuAC(AirConditioner ac)
-    {
-        Console.WriteLine("\n[MENU CONDIZIONATORE]");
-        Console.WriteLine("+. Aumenta Temperatura");
-        Console.WriteLine("-. Diminuisci Temperatura");
+            char op = char.ToLower(Console.ReadKey(true).KeyChar);
+            Console.WriteLine(op);
 
-        char op = Console.ReadKey(true).KeyChar;
-        switch (op)
-        {
-            case '+':
-                ac.increaseTemp();
-                Console.WriteLine($"Temperatura attuale: {ac.temp}°C");
-                break;
-            case '-':
-                ac.decreaseTemp();
-                Console.WriteLine($"Temperatura attuale: {ac.temp}°C");
-                break;
-        }
-        Console.WriteLine("Premi un tasto per tornare al menu principale...");
-        Console.ReadKey();
-    }
-
-    // --- SOTTOMENU SICUREZZA ---
-    static void MenuSicurezza(CCTV cctv, Door porta)
-    {
-        Console.WriteLine("\n[MENU SICUREZZA]");
-        Console.WriteLine("1. Arma/Disarma Telecamere");
-        Console.WriteLine("2. Apri/Chiudi Porta d'ingresso");
-
-        char op = Console.ReadKey(true).KeyChar;
-        switch (op)
-        {
-            case '1':
-                if (cctv.IsArmed) cctv.Disarm(); else cctv.Arm();
-                Console.WriteLine($"Stato CCTV: {(cctv.IsArmed ? "ARMATA" : "DISARMATA")}");
-                break;
-            case '2':
-                porta.changeDoorState();
-                Console.WriteLine("Stato della porta cambiato.");
-                break;
-        }
-        Console.WriteLine("Premi un tasto per tornare al menu principale...");
-        Console.ReadKey();
-    }
-
-    // ---- SOTTOMENU GESTIONE KITCHEN DEVICES (es. Fryer) ----
-    static void MenuKitchen(Fryer fryer, Forno forno)
-    {
-        Console.WriteLine("\n[MENU KITCHEN DEVICES]");
-        Console.WriteLine("FRIGGITRICE");
-        Console.WriteLine("a. Accendi friggitrice");
-        Console.WriteLine("b. Spegni friggitrice");
-        Console.WriteLine("c. Cambia stato cestello (up/down)");
-        Console.WriteLine("d. Imposta temperatura friggitrice");
-        Console.WriteLine("e. Imposta numero fritture prima cambio olio");
-
-        Console.WriteLine("\nFORNO");
-        Console.WriteLine("f. Accendi forno");
-        Console.WriteLine("g. Spegni forno");
-        Console.WriteLine("h. Imposta temperatura forno");
-        Console.WriteLine("i. Cambia modalità forno");
-        Console.WriteLine("l. Imposta timer forno");
-
-        Console.WriteLine("\n0. Torna al menu principale");
-
-        char op = Console.ReadKey(true).KeyChar;
-
-        switch (op)
-        {
-            // -------- FRYER --------
-
-            case 'a':
-                try
-                {
-                    fryer.TurnOn();
-                    Console.WriteLine("Friggitrice accesa.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Errore: {ex.Message}");
-                }
-                break;
-
-            case 'b':
-                try
-                {
-                    fryer.TurnOff();
-                    Console.WriteLine("Friggitrice spenta.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Errore: {ex.Message}");
-                }
-                break;
-
-            case 'c':
-                fryer.changeBasketStatus();
-                Console.WriteLine($"Stato cestello: {fryer.basketStatus}");
-                break;
-
-            case 'd':
-                Console.Write("\nInserisci temperatura friggitrice: ");
-                if (double.TryParse(Console.ReadLine(), out double temp))
-                {
-                    try
-                    {
-                        fryer.changeTemp(temp);
-                        Console.WriteLine($"Temperatura impostata a {fryer.temperature}°C");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Errore: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Valore temperatura non valido.");
-                }
-                break;
-
-            case 'e':
-                Console.Write("\nInserisci numero fritture prima cambio olio: ");
-                if (int.TryParse(Console.ReadLine(), out int n))
-                {
-                    try
-                    {
-                        fryer.change_NumberOfFryer_BeforeChangeOil(n);
-                        Console.WriteLine($"Numero impostato a {fryer.numberOfFryerBeforeChangeOil}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Errore: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Valore non valido.");
-                }
-                break;
-
-            // -------- FORNO --------
-
-            case 'f':
-                try
-                {
-                    forno.TurnOn();
-                    Console.WriteLine("Forno acceso.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Errore: {ex.Message}");
-                }
-                break;
-
-            case 'g':
-                try
-                {
-                    forno.TurnOff();
-                    Console.WriteLine("Forno spento.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Errore: {ex.Message}");
-                }
-                break;
-
-            case 'h':
-                Console.Write("\nInserisci temperatura forno: ");
-                if (int.TryParse(Console.ReadLine(), out int tempForno))
-                {
-                    try
-                    {
-                        forno.SetTemperatura(tempForno);
-                        Console.WriteLine($"Temperatura forno impostata a {tempForno}°C");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Errore: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Valore temperatura non valido.");
-                }
-                break;
-
-            case 'i':
-                Console.WriteLine("\nSeleziona modalità forno:");
-                Console.WriteLine("1. Statico");
-                Console.WriteLine("2. Ventilato");
-                Console.WriteLine("3. Grill");
-                Console.WriteLine("4. Scongelamento");
-                Console.WriteLine("5. Pizza");
-
-                if (int.TryParse(Console.ReadLine(), out int scelta))
-                {
-                    try
-                    {
-                        ModalitaForno modalita = (ModalitaForno)(scelta - 1);
-                        forno.SetModalita(modalita);
-                        Console.WriteLine($"Modalità impostata: {modalita}");
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Modalità non valida.");
-                    }
-                }
-                break;
-
-            case 'l':
-                Console.Write("\nInserisci durata timer in minuti: ");
-                if (int.TryParse(Console.ReadLine(), out int minuti))
-                {
-                    try
-                    {
-                        forno.SetTimer(TimeSpan.FromMinutes(minuti));
-                        Console.WriteLine($"Timer impostato a {minuti} minuti.");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Errore: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Valore non valido.");
-                }
-                break;
-
-            case '0':
-                return;
-
-            default:
-                Console.WriteLine("Scelta non valida.");
-                break;
+            switch (op)
+            {
+                case 'a': row.SwitchOn(); Console.WriteLine("-> Gruppo acceso."); break;
+                case 'b': row.SwitchOff(); Console.WriteLine("-> Gruppo spento."); break;
+                case 'c':
+                    Console.Write("Inserisci valore intensità (0-100): ");
+                    if (int.TryParse(Console.ReadLine(), out int val)) row.SetIntensityForAllLamps(val);
+                    break;
+            }
+            if (op != '0') Console.ReadKey();
         }
 
-        Console.WriteLine("Premi un tasto per tornare al menu principale...");
-        Console.ReadKey();
+        static void MenuAC(AirConditioner ac)
+        {
+            bool back = false;
+            while (!back)
+            {
+                Console.Clear();
+                Console.WriteLine("=== [CONTROLLO CLIMATIZZAZIONE] ===");
+                Console.WriteLine($"Stato attuale: {ac.temp}°C");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine(" [+] Aumenta temp. | [-] Diminuisci temp.");
+                Console.WriteLine(" [0] Salva e torna indietro");
+                Console.Write("\nComando: ");
+
+                char op = Console.ReadKey(true).KeyChar;
+                if (op == '+') ac.increaseTemp();
+                else if (op == '-') ac.decreaseTemp();
+                else if (op == '0') back = true;
+            }
+        }
+
+        static void MenuSicurezza(CCTV cctv, Door porta)
+        {
+            Console.Clear();
+            Console.WriteLine("=== [SISTEMA DI SICUREZZA] ===");
+            Console.WriteLine($"1. Telecamera Ake:  [{(cctv.IsArmed ? "ARMATA" : "DISARMATA")}]");
+            Console.WriteLine($"2. Serratura Porta: [{(porta.isOpen ? "APERTA" : "CHIUSA")}]");
+            Console.WriteLine("0. Torna indietro");
+            Console.WriteLine("------------------------------");
+            Console.Write("Seleziona dispositivo da commutare: ");
+
+            string input = Console.ReadLine();
+            if (input == "1") { if (cctv.IsArmed) cctv.Disarm(); else cctv.Arm(); Console.WriteLine("Stato CCTV cambiato."); }
+            else if (input == "2") { porta.changeDoorState(); Console.WriteLine("Stato Porta cambiato."); }
+
+            if (input != "0") Console.ReadKey();
+        }
+
+        static void MenuKitchen(Fryer fryer, Forno forno)
+        {
+            bool back = false;
+            while (!back)
+            {
+                Console.Clear();
+                Console.WriteLine("=== [ELETTRODOMESTICI CUCINA] ===");
+                // Utilizzo della variabile 'status' come definito nelle tue classi
+                Console.WriteLine($"1. Friggitrice  [{(fryer.status ? "ON" : "OFF")}]");
+                Console.WriteLine($"2. Forno        [{(forno.status ? "ON" : "OFF")}]");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("a. Accendi/Spegni Friggitrice");
+                Console.WriteLine("b. Accendi/Spegni Forno");
+                Console.WriteLine("c. Imposta Temperatura Forno");
+                Console.WriteLine("0. Torna indietro");
+                Console.WriteLine("---------------------------------");
+                Console.Write("Scegli un'opzione: ");
+
+                string choice = Console.ReadLine()?.ToLower();
+
+                switch (choice)
+                {
+                    case "a":
+                        if (fryer.status) fryer.TurnOff(); else fryer.TurnOn();
+                        Console.WriteLine($"-> Friggitrice ora è {(fryer.status ? "ACCESA" : "SPENTA")}");
+                        break;
+                    case "b":
+                        if (forno.status) forno.TurnOff(); else forno.TurnOn();
+                        Console.WriteLine($"-> Forno ora è {(forno.status ? "ACCESO" : "SPENTO")}");
+                        break;
+                    case "c":
+                        Console.Write("Inserisci temperatura forno (°C): ");
+                        if (int.TryParse(Console.ReadLine(), out int t))
+                        {
+                            forno.SetTemperatura(t);
+                            Console.WriteLine($"-> Temperatura impostata a {t}°C");
+                        }
+                        break;
+                    case "0":
+                        back = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opzione non valida.");
+                        break;
+                }
+
+                if (!back)
+                {
+                    Console.WriteLine("\nPremi un tasto per continuare...");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        static void MenuLampController(LampController controller)
+        {
+            bool back = false;
+            while (!back)
+            {
+                Console.Clear();
+                Console.WriteLine("=== [CQRS ADVANCED LAMP CONTROLLER] ===");
+                controller.ShowMenu();
+                Console.Write("\nComando Expert (0 per uscire): ");
+
+                string input = Console.ReadLine();
+                if (input == "0" || input == "7") { back = true; continue; }
+
+                try
+                {
+                    switch (input)
+                    {
+                        case "1": controller.AddLamp(); break;
+                        case "2": controller.RemoveLamp(); break;
+                        case "3": controller.TurnOnLamp(); break;
+                        case "4": controller.TurnOffLamp(); break;
+                        case "5": controller.ChangeIntensity(); break;
+                        case "6": controller.ListLamps(); break;
+                        default: Console.WriteLine("Opzione non riconosciuta."); break;
+                    }
+                }
+                catch (Exception ex) { Console.WriteLine($"\n[ERRORE]: {ex.Message}"); }
+
+                if (!back) { Console.WriteLine("\nPremi un tasto per continuare..."); Console.ReadKey(); }
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.Security_devices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices.Repositories
         void Add(EcoLamp ecolamp);
         void Update(EcoLamp ecolamp);
         void Remove(Guid id);
-        Door GetById(Guid id);
+        EcoLamp GetById(Guid id);
         List<EcoLamp> GetAll();
     }
 }
+

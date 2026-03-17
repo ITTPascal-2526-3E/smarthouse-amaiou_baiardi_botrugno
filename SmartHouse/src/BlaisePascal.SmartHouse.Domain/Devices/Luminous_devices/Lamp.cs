@@ -10,9 +10,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public string Name { get; protected set; }
         public LampType LampType { get; protected set; }
         public double LampHeat { get; protected set; }
-        public EnergyClass EnergyClass { get; protected set; } 
+        public EnergyClass EnergyClass { get; protected set; }
         public int brightness { get; set; }
-        public int Lumen { get;protected set; }
+        public int Lumen { get; protected set; }
         public Color color { get; set; }
         public int DurationBeforeItFlashes { get; protected set; }
 
@@ -21,14 +21,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         public bool status = false;
 
         //Costruttore di Lamp
-        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes,int Initialbrightness, Name name)
+        public Lamp(double lampHeat, int lumen, int durationBeforeItFlashes, int Initialbrightness, Name name)
         {
             Id = Guid.NewGuid();
             status = false;
             this.LampHeat = lampHeat;
             this.Lumen = lumen;
             this.DurationBeforeItFlashes = durationBeforeItFlashes;
-            this.brightness = Initialbrightness;   
+            this.brightness = Initialbrightness;
             this.Name = name.value;
         }
         // accendi e spegni la lampada
@@ -57,17 +57,17 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
         //poi Controlla se esiste un valore dell’enum LampType con quel nome e infine
         //restituisce il valore dell’enum corrispondente.
         public LampType setLampType(string lamptype)      //Prende una stringa (lampType, ad es. "Led")  
-        {                                    
-            if(!Enum.IsDefined(typeof(LampType), lamptype))  
+        {
+            if (!Enum.IsDefined(typeof(LampType), lamptype))
             {
                 throw new ArgumentException("Invalid lamp type");
             }
-            LampType = Enum.Parse<LampType>(lamptype);    
+            LampType = Enum.Parse<LampType>(lamptype);
             return LampType;
         }
 
-        public virtual void setEnergyClass (string energyClass)       
-        {              
+        public virtual void setEnergyClass(string energyClass)
+        {
             if (!Enum.IsDefined(typeof(EnergyClass), energyClass))
             {
                 throw new ArgumentException("Invalid energy class");
@@ -75,11 +75,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Luminous_devices
             this.EnergyClass = Enum.Parse<EnergyClass>(energyClass);
         }
 
-       
+
 
         //Cambia il colore della lampada
-        public void changeColor(string color)   
-        { 
+        public void changeColor(string color)
+        {
             if (LampType == LampType.led)
             {
                 this.color = Enum.Parse<Color>(color);
