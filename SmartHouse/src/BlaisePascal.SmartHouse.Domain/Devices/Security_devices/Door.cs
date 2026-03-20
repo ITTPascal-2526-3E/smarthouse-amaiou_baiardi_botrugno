@@ -37,7 +37,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Security_devices
 
         public void changeDoorState()
         {
-            if (!(isOpen == true))
+            if (isOpen == true)
             {
                 isOpen = false;
             }
