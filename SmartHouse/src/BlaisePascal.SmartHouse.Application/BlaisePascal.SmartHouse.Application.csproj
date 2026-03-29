@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+    <EmbeddedResource Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+    <None Remove="Devices\Elettrodomestico_Forno\Forno\Commands\Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Domain\BlaisePascal.SmartHouse.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Devices\DispositivoCCTV\CCTV\Dto\" />
+    <Folder Include="Devices\DispositivoCCTV\CCTV\Mappers\" />
+    <Folder Include="Devices\Elettrodomestico_Forno\Forno\Dto\" />
+    <Folder Include="Devices\Elettrodomestico_Forno\Forno\Mappers\" />
+    <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Dto\" />
+    <Folder Include="Devices\Elettrodomestico_Fryer\Fryer\Mappers\" />
+    <Folder Include="Devices\InfissoDoor\Door\Dto\" />
+    <Folder Include="Devices\InfissoDoor\Door\Mappers\" />
+    <Folder Include="Devices\Lightning\Lamps\Dto\" />
+    <Folder Include="Devices\Lightning\Lamps\Mappers\" />
+  </ItemGroup>
+
+</Project>
